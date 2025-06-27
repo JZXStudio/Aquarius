@@ -1,0 +1,23 @@
+@Tutorial(time: 20) {
+    @Intro(title: "打印日志") {
+        如何打印日志
+        
+        @Image(source: icon.png)
+    }
+    
+    @Section(title: "打印日志") {
+        @ContentAndMedia {
+            如何打印日志
+            
+            @Image(source: icon.png)
+        }
+        
+        @Steps {
+            @Step {
+                ALogger
+                
+                @Image(source: icon.png)
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+@Tutorial(time: 20) {
+    @Intro(title: "安全检测") {
+        如何安全检测
+        
+        @Image(source: icon.png)
+    }
+    
+    @Section(title: "安全检测") {
+        @ContentAndMedia {
+            如何安全检测
+            
+            @Image(source: icon.png)
+        }
+        
+        @Steps {
+            @Step {
+                ACommon
+                
+                @Image(source: icon.png)
+            }
+        }
+    }
+}

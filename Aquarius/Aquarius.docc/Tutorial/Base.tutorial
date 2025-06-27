@@ -1,0 +1,81 @@
+@Tutorial(time: 20) {
+    @Intro(title: "基础实现逻辑") {
+        各函数都是做什么用的
+    }
+    
+    @Section(title: "各函数如何使用") {
+        @ContentAndMedia {
+            销毁函数
+        }
+        
+        @Steps {
+            @Step {
+                a_Clear
+            }
+            
+            @Step {
+                a_Preview
+            }
+            
+            @Step {
+                a_Begin
+            }
+            
+            @Step {
+                a_Navigation
+            }
+            
+            @Step {
+                a_UI
+            }
+            
+            @Step {
+                a_UIConfig
+            }
+            
+            @Step {
+                a_Layout
+            }
+            
+            @Step {
+                a_Delegate
+            }
+            
+            @Step {
+                a_Notification
+            }
+            
+            @Step {
+                a_Bind
+            }
+            
+            @Step {
+                a_Observe
+            }
+            
+            @Step {
+                a_Event
+            }
+            
+            @Step {
+                a_Other
+            }
+            
+            @Step {
+                a_End
+            }
+            
+            @Step {
+                updateThemeStyle
+            }
+            
+            @Step {
+                a_Test
+            }
+            
+            @Step {
+                a_Inject
+            }
+        }
+    }
+}

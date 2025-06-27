@@ -1,0 +1,51 @@
+@Tutorial(time: 20) {
+    @Intro(title: "主题") {
+        主题介绍
+        
+        @Image(source: icon.png)
+    }
+    
+    @Section(title: "主题") {
+        @ContentAndMedia {
+            ####ADesign
+            ####ALayout
+            ####UIDesign
+            ####PTDesign
+            ####AThemeStyle
+            
+            @Image(source: icon.png)
+        }
+        
+        @Steps {
+            @Step {
+                ADesign
+                
+                @Image(source: icon.png)
+            }
+            
+            @Step {
+                ALayout
+                
+                @Image(source: icon.png)
+            }
+            
+            @Step {
+                UIDesign
+                
+                @Image(source: icon.png)
+            }
+            
+            @Step {
+                PTDesign
+                
+                @Image(source: icon.png)
+            }
+            
+            @Step {
+                AThemeStyle
+                
+                @Image(source: icon.png)
+            }
+        }
+    }
+}

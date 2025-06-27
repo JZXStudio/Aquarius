@@ -1,0 +1,11 @@
+framework module Aquarius {
+  umbrella header "Aquarius.h"
+  export *
+
+  module * { export * }
+}
+
+module Aquarius.Swift {
+  header "Aquarius-Swift.h"
+  requires objc
+}

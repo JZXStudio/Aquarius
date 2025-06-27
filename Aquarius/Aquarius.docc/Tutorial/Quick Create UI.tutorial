@@ -1,0 +1,23 @@
+@Tutorial(time: 20) {
+    @Intro(title: "快速创建组件") {
+        如何创建组件
+        
+        @Image(source: icon.png)
+    }
+    
+    @Section(title: "快速创建组件") {
+        @ContentAndMedia {
+            如何创建组件
+            
+            @Image(source: icon.png)
+        }
+        
+        @Steps {
+            @Step {
+                AUI
+                
+                @Image(source: icon.png)
+            }
+        }
+    }
+}

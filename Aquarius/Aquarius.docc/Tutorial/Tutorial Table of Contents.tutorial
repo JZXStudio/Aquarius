@@ -1,0 +1,51 @@
+@Tutorials(name: "Aquarius") {
+    @Intro(title: "水瓶座框架") {
+        **水瓶座**是为帮助SWIFT开发者以快速开发为目的而设计的开发框架。
+
+        框架以MVVM开发模式构建，并参考时下流行的开发框架，加入了**链式**、**绑定**、**动态布局**等先进的开发方法
+        
+        @Image(source: icon.png)
+    }
+    
+    @Chapter(name: "基础实现逻辑") {
+        各函数都是做什么用的
+        @Image(source: icon.png)
+        @TutorialReference(tutorial: "doc:Base")
+    }
+    
+    @Chapter(name: "数据") {
+        如何使用数据
+        @Image(source: icon.png)
+        @TutorialReference(tutorial: "doc:Data")
+    }
+    
+    @Chapter(name: "主题") {
+        如何使用主题
+        @Image(source: icon.png)
+        @TutorialReference(tutorial: "doc:Theme")
+    }
+    
+    @Chapter(name: "快速创建UI组件") {
+        如何快速创建UI组件
+        @Image(source: icon.png)
+        @TutorialReference(tutorial: "doc:Quick Create UI")
+    }
+    
+    @Chapter(name: "安全检测") {
+        如何安全检测
+        @Image(source: icon.png)
+        @TutorialReference(tutorial: "doc:Safe Check")
+    }
+    
+    @Chapter(name: "打印日志") {
+        如何打印日志
+        @Image(source: icon.png)
+        @TutorialReference(tutorial: "doc:Logger")
+    }
+    
+    @Chapter(name: "链式编程") {
+        如何打印日志
+        @Image(source: icon.png)
+        @TutorialReference(tutorial: "doc:Chained Programming")
+    }
+}

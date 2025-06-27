@@ -1,0 +1,23 @@
+@Tutorial(time: 20) {
+    @Intro(title: "链式编程") {
+        如何链式编程
+        
+        @Image(source: icon.png)
+    }
+    
+    @Section(title: "链式编程") {
+        @ContentAndMedia {
+            如何链式编程
+            
+            @Image(source: icon.png)
+        }
+        
+        @Steps {
+            @Step {
+                链式编程
+                
+                @Image(source: icon.png)
+            }
+        }
+    }
+}
