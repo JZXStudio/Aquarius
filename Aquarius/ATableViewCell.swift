@@ -23,6 +23,12 @@ open class ATableViewCell: UITableViewCell, ANotificationDelegate {
     /// __需要手动设置，设置后在其它类中使用__
     public var a_inset: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     
+    deinit {
+        notification?.delegate = nil
+        
+        a_Clear()
+    }
+    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

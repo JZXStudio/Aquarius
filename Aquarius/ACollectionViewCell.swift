@@ -11,6 +11,10 @@ import Foundation
 open class ACollectionViewCell: UICollectionViewCell, ANotificationDelegate {
     private var notification: ANotification?
     
+    deinit {
+        a_Clear()
+    }
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         

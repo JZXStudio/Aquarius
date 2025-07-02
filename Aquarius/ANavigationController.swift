@@ -13,6 +13,8 @@ open class ANavigationController: UINavigationController, ANotificationDelegate 
     
     deinit {
         notification.delegate = nil
+        
+        a_Clear()
     }
     
     override open func viewDidLoad() {

@@ -13,6 +13,8 @@ open class ATabBarController: UITabBarController, ANotificationDelegate {
     
     deinit {
         notification.delegate = nil
+        
+        a_Clear()
     }
     
     override open func viewDidLoad() {
