@@ -19,6 +19,20 @@ Aquarius是以帮助独立开发者规范化开发流程，提高开发效率为
 
 框架提供数据绑定功能，既支持变量间的动态数据更新，也支持变量与UI组件属性的动态数据更新
 
+# 要求
+
+- iOS15.0
+
+- Swift15.x
+
+# 沟通
+
+如对框架的使用及建议等可在`B站`、`小红书`、`微信`搜索**JZXStudio**联系我。
+
+也可以给我发邮件[studio_jzx@163.com](mailto:studio_jzx@163.com)
+
+# 核心功能
+
 框架提供：
 
 1. MVVM设计模式
@@ -950,7 +964,6 @@ let image: UIImage? = data.toImage()
 **TestVM**
 
 ```swift
-
 import Aquarius
 
 class TestVM: AViewModel {
@@ -968,10 +981,10 @@ import Aquarius
 
 class TestVC: AViewController {
     private let viewModel: TestVM = TestVM()
-    
+
     override func a_Observe() {
         super.a_Observe()
-        
+
         self.viewModel.kvo = self.viewModel
             .observe(\.kObserveTag_RefreshTableView, options: .new, changeHandler: { [weak self] (object, change) in
                 if change.newValue! as Bool {
@@ -1031,10 +1044,10 @@ class TestView: AView {
 class TestVC: AViewController {
     private let viewModel: TestVM = TestVM()
     private let a_view: TestView = TestView()
-    
+
     override func a_Delegate() {
         super.a_Delegate()
-        
+
         viewModel.Manage_SetDelegate(
             targetObject: a_view,
             delegateNames: AProtocol.delegateAndDataSource,
@@ -1046,29 +1059,29 @@ class TestVC: AViewController {
      //另外两种写法
     override func a_Delegate() {
         super.a_Delegate()
-        
+
         viewModel.Manage_SetDelegate(
             targetObject: a_view,
             delegateName: AProtocol.delegate,
             object: self
         )
-        
+
         viewModel.Manage_SetDelegate(
             targetObject: a_view,
             delegateName: AProtocol.dataSource,
             object: self
         )
     }
-    
+
     override func a_Delegate() {
         super.a_Delegate()
-        
+
         viewModel.Manage_SetDelegate(
             targetObject: a_view,
             delegateName: "delegate",
             object: self
         )
-        
+
         viewModel.Manage_SetDelegate(
             targetObject: a_view,
             delegateName: "dataSource",
@@ -1103,10 +1116,10 @@ func ANotificationReceive(notification: Notification)
 ```swift
 class TestView: AView {
     private let testButton: UIButton = A.ui.button
-    
+
     override func a_Event() {
         super.a_Event()
-        
+
         testButton.addTouchUpInsideBlock { [weak self] result in
             self?.Manage_PostNotification(
                 "notificationID",
@@ -1125,10 +1138,10 @@ class TestVM: AViewModel {
     override func a_Notification() {
         Manage_SetNotification("notificationID")
     }
-    
+
     override func ANotificationReceive(notification: Notification) {
         super.ANotificationReceive(notification: notification)
-        
+
         if notification.isNotificationName("notificationID") {
             let paramString: String = notification.objectValue(ANotification.kANotificationData) as! String
         }
