@@ -33,23 +33,27 @@ Aquarius是以帮助独立开发者规范化开发流程，提高开发效率为
 
 6. 格式转换
 
-7. 通知
+7. 依赖注入
 
-8. userDefaults
+8. 自动管理
 
-9. 内购
-
-10. 日历/提醒
-
-11. 位置
-
-12. 依赖注入
-
-13. 日志
-
-14. Timer
-
-15. 格式化属性
+9. 工具
+   
+   1. 通知
+   
+   2. userDefaults
+   
+   3. 内购
+   
+   4. 日历/提醒
+   
+   5. 位置
+   
+   6. 日志
+   
+   7. Timer
+   
+   8. 格式化属性
 
 # MVVM设计模式
 
@@ -931,4 +935,204 @@ let data1: Data? = image.toJPEGData()
 let data2: Data? = image.toPNGData()
 //Data转UIImage
 let image: UIImage? = data.toImage()
+```
+
+# 依赖注入
+
+框架基于`KVO`提供**依赖注入**功能。
+
+**依赖注入**主要解决`MVVM`设计模式中`Controller`和`viewModel`之间的解耦问题
+
+建议此类功能代码放到**a_Observe**中
+
+代码示例：
+
+**TestVM**
+
+```swift
+
+import Aquarius
+
+class TestVM: AViewModel {
+    //依赖注入的变量建议以kObserveTag开头
+    @objc dynamic
+    public var kObserveTag_RefreshTableView: Bool = false
+    ...
+}
+```
+
+**TestVC**
+
+```swift
+import Aquarius
+
+class TestVC: AViewController {
+    private let viewModel: TestVM = TestVM()
+    
+    override func a_Observe() {
+        super.a_Observe()
+        
+        self.viewModel.kvo = self.viewModel
+            .observe(\.kObserveTag_RefreshTableView, options: .new, changeHandler: { [weak self] (object, change) in
+                if change.newValue! as Bool {
+                    ...
+                }
+        })
+    }
+}
+```
+
+注意：建议将**observe**创建的实例保存到**viewModel.kvo**中，框架未来将提供自动管理**oberve**的能力
+
+# 自动管理
+
+当前，框架针对`Delegate`和`Notification`提供自动管理功能。
+
+基于自动管理模块使用`Delegate`和`Notification`只需关心创建即可，框架将在页面销毁时，自动删除创建的`Delegate`和`Notification`
+
+## Delegate
+
+建议此类功能代码放到**a_Delegate**中
+
+`AViewModel`提供如下方法：
+
+```swift
+func Manage_SetDelegate(targetObject: AnyObject, delegateName: String, object: AnyObject)
+func Manage_SetDelegate(targetObject: AnyObject, delegateNames: Array<String>, object: AnyObject)
+func Manage_DeleteDelegate(object: AnyObject, delegateName: String)
+func Manage_DeleteDelegate(object: AnyObject, delegateNames: Array<String>)
+```
+
+`AProtocol`提供如下方法：
+
+```swift
+public static let delegate: String
+public static let emptyDelegate: String
+public static let dataSource: String
+public static let delegateAndDataSource: [String]
+```
+
+建议在`Controller`中使用。
+
+示例代码：
+
+**TestView**
+
+```swift
+class TestView: AView {
+    public let testTableView: UITableView = A.ui.tableView
+    ...
+}
+```
+
+**TestVC**
+
+```swift
+class TestVC: AViewController {
+    private let viewModel: TestVM = TestVM()
+    private let a_view: TestView = TestView()
+    
+    override func a_Delegate() {
+        super.a_Delegate()
+        
+        viewModel.Manage_SetDelegate(
+            targetObject: a_view,
+            delegateNames: AProtocol.delegateAndDataSource,
+            object: self
+        )
+    }
+
+    /*
+     //另外两种写法
+    override func a_Delegate() {
+        super.a_Delegate()
+        
+        viewModel.Manage_SetDelegate(
+            targetObject: a_view,
+            delegateName: AProtocol.delegate,
+            object: self
+        )
+        
+        viewModel.Manage_SetDelegate(
+            targetObject: a_view,
+            delegateName: AProtocol.dataSource,
+            object: self
+        )
+    }
+    
+    override func a_Delegate() {
+        super.a_Delegate()
+        
+        viewModel.Manage_SetDelegate(
+            targetObject: a_view,
+            delegateName: "delegate",
+            object: self
+        )
+        
+        viewModel.Manage_SetDelegate(
+            targetObject: a_view,
+            delegateName: "dataSource",
+            object: self
+        )
+    }
+     */
+    ...
+}
+```
+
+## Notification
+
+建议此类功能代码放到**a_Notification**中
+
+`AViewModel`和`AView`提供如下方法：
+
+```swift
+func Manage_SetNotification(_ notificationName: String)
+func Manage_SetNotifications(_ notificationNames: Array<String>)
+func Manage_DeleteNotification(_ notificationName: String)
+func Manage_DeleteNotifications(_ notificationNames: Array<String>)
+func Manage_PostNotification(_ notificationName: String, object:[String : Any]?=nil)
+func Manage_PostNotifications(_ notificationNames: [String], objects: [[String : Any]?]?=nil)
+func ANotificationReceive(notification: Notification)
+```
+
+示例代码：
+
+**TestView**
+
+```swift
+class TestView: AView {
+    private let testButton: UIButton = A.ui.button
+    
+    override func a_Event() {
+        super.a_Event()
+        
+        testButton.addTouchUpInsideBlock { [weak self] result in
+            self?.Manage_PostNotification(
+                "notificationID",
+                object: ANotification.packageCoreNotificationDataValue(value: "123")
+            )
+        }
+    }
+    ...
+}
+```
+
+**TestVM**
+
+```swift
+class TestVM: AViewModel {
+    override func a_Notification() {
+        Manage_SetNotification("notificationID")
+    }
+    
+    override func ANotificationReceive(notification: Notification) {
+        super.ANotificationReceive(notification: notification)
+        
+        if notification.isNotificationName("notificationID") {
+            let paramString: String = notification.objectValue(ANotification.kANotificationData) as! String
+        }
+    }
+    ...
+}
 ```
