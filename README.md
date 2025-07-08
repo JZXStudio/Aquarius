@@ -649,6 +649,24 @@ func brownBackgroundColor()
 func testBackgroundColor()
 ```
 
+## 批量设置UI控件
+
+当多个UI控件具有相同的属性，可以将多个UI控件放入一个数组中，并直接处理数组。
+
+示例代码：
+
+```swift
+override func a_UIConfig() {
+    super.a_UIConfig()
+
+    let uiArray: [UIView] = [testButton, testLabel]
+    uiArray.layerCornerRadius(8.0)
+    uiArray.backgroundColor(0xFFFFFF.toColor)
+}
+```
+
+支持批量设置的方法参见：**Array++.swift**
+
 ## UI控件的添加和删除
 
 框架支持单独添加UI控件和批量添加UI控件。在实际开发中，建议使用批量添加UI控件的方法。
@@ -708,4 +726,209 @@ public var navigation_RightBarButtonImage: UIImage?
 public var navigation_RightBarButtonTintColor: UIColor?
 public var navigation_RightBarButtonAction: Selector?
 public func navigation_RigthBarButtonSelector(executeBlock: (() -> Void)?)
+```
+
+# 深色模式切换
+
+框架提供了支持模式切换的功能。开发过程中，建议使用主题文件的形式。
+
+实现模式切换的步骤如下：
+
+1. 制作主题类
+
+2. 重写updateThemeStyle方法
+
+## 制作主题类
+
+主题类需继承`DesignColorProtocol`协议。
+
+`DesignColorProtocol`协议提供了标准的颜色定义。详细请查看**DesignColorProtocol**中的定义。
+
+主题类示例：
+
+```swift
+import UIKit
+import Foundation
+
+import Aquarius
+
+class ColorDesign: DesignColorProtocol {
+    var textPrimaryColor: UIColor {
+        get {
+            AThemeStyle.getThemeColor([
+                //普通模式颜色
+                .Light : 0xF2F2F2.toColor,
+                //深色模式颜色
+                .Dark : 0x151F2E.toColor
+            ])
+        }
+    }
+
+    var primaryColor: UIColor {
+        get {
+            AThemeStyle.getThemeColor([
+                .Light : 0xF2F2F2.toColor,
+                .Dark : 0x151F2E.toColor
+            ])
+        }
+    }
+
+    public static let shared = ColorDesign()
+}
+```
+
+## updateThemeStyle方法
+
+定义主题类后，`AViewController`和`AView`提供了**updateThemeStyle**方法。
+
+再此方法中更新主题。
+
+示例代码：
+
+```swift
+import UIKit
+import Foundation
+
+import Aquarius
+
+class MainView: AView {
+    public let testLabel: UILabel = A.ui.label
+    public let testButton: UIButton = A.ui.button
+
+    override func a_UI() {
+        super.a_UI()
+
+        addSubviews(views:[
+            testLabel,
+            testButton
+        ])
+    }
+
+    override func updateThemeStyle() {
+        super.updateThemeStyle()
+
+        testLabel.textColor = ColorDesign.shared.textPrimaryColor
+        testButton.backgroundColor = ColorDesign.shared.primaryColor
+    }
+}
+```
+
+示例中，当系统由普通模式转换为深色模式，或者由深色模式转换为普通模式时，继承`AView`或者`AViewController`的类将自动执行**updateThemeStyle**方法。
+
+方法体将重新设置`testLabel`的**textColor**和`testButton`的**backgroundColor**属性。
+
+`textPrimaryColor`和`primaryColor`将会根据主题类中的设置，自动判断是普通模式还是深色模式，并返回对应的颜色值。
+
+## getThemeColor方法
+
+不使用主题类的情况下，可以直接通过**getThemeColor**方法设置颜色
+
+```swift
+static func getThemeColor(_ themeColorDict: [AThemeStyleDarkModeType : UIColor]) -> UIColor
+```
+
+示例代码：
+
+```swift
+import UIKit
+import Foundation
+
+import Aquarius
+
+class MainView: AView {
+    public let testLabel: UILabel = A.ui.label
+    public let testButton: UIButton = A.ui.button
+
+    override func a_UI() {
+        super.a_UI()
+
+        addSubviews(views:[
+            testLabel,
+            testButton
+        ])
+    }
+
+    override func updateThemeStyle() {
+        super.updateThemeStyle()
+
+        testLabel.textColor = AThemeStyle.getThemeColor([
+            .Light : 0xF2F2F2.toColor,
+            .Dark : 0x151F2E.toColor
+        ])
+        testButton.backgroundColor = ColorDesign.shared.primaryColor
+    }
+}
+```
+
+# 格式转换
+
+框架提供大部分的格式想换转换的简写方法。
+
+示例代码：
+
+```swift
+//颜色转换
+let color: UIColor = 0xFFFFFF.toColor
+//Int字号转换
+let font1: UIFont = 18.toFont
+let font2: UIFont = 18.toBoldFont
+//Int转CGFloat
+let f: CGFloat = 18.toCGFloat
+//Int转NSNumber
+let n: NSNumber = 18.toNumber
+//Int转Double
+let double: Double = 18.toDouble
+//字符串转日期（默认为完整日期，包括日期+时间）
+let date1: Date = "2025-05-10 18:00:00".toDate()
+//字符串转日期
+let date2: Date = "2025-05-10".toShortDate()
+//字符串转日期（包括日期+时间）
+let date3: Date = "2025-05-10".toLongDate()
+//字符串转图片
+let image1: UIImage = "name.png".toContentsOfFileImage()
+let image2: UIImage = "name.png".toNamedImage()
+let image3: UIImage = "setting.png".toSystemNameImage()
+//字符串转Int
+let data: Int? = "1".toInt()
+//字符串转Bool
+let flag: Bool = "1".toBool()
+//字符串转CGFloat
+let f: CGFloat = "1".toCGFloat()
+//字符串转Double
+let double: Double = "18.85".toDouble()
+//CGFloat转Font
+let font1: UIFont = 18.0.toFont
+let font2: UIFont = 18.0.toBoldFont
+//CGFloat转字符串
+let string: String = 18.0.toString()
+//日期转String
+let string1: String = Date().toString()
+let string2: String = Date().toShortEnglishString()
+let string3: String = Date().toShortChineseString()
+let string4: String = Date().toLongEnglishString()
+let string5: String = Date().toLongChineseString()
+let yearString: String = Date().toYearString()
+let year: Int? = Date().toYear()
+let monthString: String = Date().toMonthString()
+let month: Int? = Date().toMonth()
+let dayString: String = Date().toDayString()
+let day: Int? = Date().toDay()
+let time: String = Date().toTimeString()
+let hourString: String = Date().toHourString()
+let hour: Int? = Date().toHour()
+let minuteString: String = Date().toMinuteString()
+let minute: Int? = Date().toMinute()
+let secondString: String = Date().toSecondString()
+let second: Int? = Date().toSecond()
+//Bool转Int
+let flag: Int = false.toInt()
+//Bool转String
+let flagString: String = false.toString()
+//UIColor转String
+let colorString: String = 0xFFFFFF.toHexString()
+//UIImage转Data
+let data1: Data? = image.toJPEGData()
+let data2: Data? = image.toPNGData()
+//Data转UIImage
+let image: UIImage? = data.toImage()
 ```
