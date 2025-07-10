@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="Sources/Aquarius.png" width='20%'>
+  <img src="Sources/Aquarius.png" width='100%'>
   <br>
   <br>
   <img src="Sources/iOS-10.5-green.svg"> <img src="Sources/license-MIT-orange.svg"> <img src="Sources/swift-5.0-red.svg">
