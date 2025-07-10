@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import MapKit
 import Foundation
 
 open class AUI: NSObject {
@@ -472,4 +473,12 @@ open class AUI: NSObject {
     }
     
     public lazy var lazyActionSheet: UIAlertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+    
+    public var mapView: MKMapView {
+        get {
+            return MKMapView()
+        }
+    }
+    
+    public lazy var lazyMapView: MKMapView = MKMapView()
 }

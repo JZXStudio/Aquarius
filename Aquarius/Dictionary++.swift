@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2024/2/11.
 //
-
+import UIKit
 import Foundation
 
 extension Dictionary {
@@ -118,5 +118,14 @@ extension Dictionary {
     public func getDataValue(_ keyString: String) -> Data {
         let obj = self as? [String : Any]
         return obj![keyString] as! Data
+    }
+    
+    public func getImageValue(_ at: Int = 0) -> UIImage {
+        return getValue(at) as! UIImage
+    }
+    
+    public func getImageValue(_ keyString: String) -> UIImage {
+        let obj = self as? [String : Any]
+        return obj![keyString] as! UIImage
     }
 }

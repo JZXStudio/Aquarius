@@ -71,7 +71,7 @@ Aquarius是以帮助独立开发者规范化开发流程，提高开发效率为
 
 # MVVM设计模式
 
-框架提供`AView`、`AViewController`、`AViewModel`，开发中，需基于此三个基类开始开发。例如：
+框架提供`AView`、`AViewController`、`AViewModel`，开发中，需基于此三个基类开始开发。
 
 **AView**
 
@@ -93,7 +93,7 @@ Aquarius是以帮助独立开发者规范化开发流程，提高开发效率为
 
 8. 热更新管理
 
-**代码示例：**
+示例代码：
 
 ```swift
 import Aquarius
@@ -120,7 +120,7 @@ class TestView: AView {
 
 6. 热更新管理
 
-**代码示例：**
+示例代码：
 
 ```swift
 import Aquarius
@@ -147,6 +147,8 @@ class TestViewController: AViewController {
 
 6. 热更新管理
 
+示例代码：
+
 ```swift
 import Aquarius
 
@@ -166,7 +168,7 @@ class TestVM: AViewModel {
 
 ## AViewController
 
-初始化中执行的方法包括：
+**初始化**中执行的方法包括：
 
 1. a_Preview：开始前执行
 
@@ -186,7 +188,7 @@ class TestVM: AViewModel {
 
 9. a_Event：设置事件
 
-viewDidLoad方法中执行的方法主要包括：
+**viewDidLoad**方法中执行的方法主要包括：
 
 1. a_UI：设置UI组件
 
@@ -200,13 +202,13 @@ viewDidLoad方法中执行的方法主要包括：
 
 6. a_Test：测试的代码函数，此函数值在debug模式下执行，发布后不执行
 
-deinit方法中执行的方法包括：
+**deinit**方法中执行的方法包括：
 
 1. a_Clear：销毁时执行
 
 ## AView
 
-初始化中执行的方法包括：
+**初始化**中执行的方法包括：
 
 1. a_Preview：开始前执行
 
@@ -234,13 +236,13 @@ deinit方法中执行的方法包括：
 
 13. a_Test：测试的代码函数，此函数值在debug模式下执行，发布后不执行
 
-deinit方法中执行的方法包括：
+**deinit**方法中执行的方法包括：
 
 1. a_Clear：销毁时执行
 
 ## AViewModel
 
-初始化中执行的方法包括：
+**初始化**中执行的方法包括：
 
 1. a_Preview：开始前执行
 
@@ -258,13 +260,13 @@ deinit方法中执行的方法包括：
 
 8. a_Test：测试的代码函数，此函数值在debug模式下执行，发布后不执行
 
-deinit方法中执行的方法包括：
+**deinit**方法中执行的方法包括：
 
 1. a_Clear：销毁时执行
 
 ## ATableViewCell
 
-初始化中执行的方法包括：
+**初始化**中执行的方法包括：
 
 1. a_Preview：开始前执行
 
@@ -294,7 +296,7 @@ deinit方法中执行的方法包括：
 
 14. configWithCell(cellData: Any)：cell接收数据时调用
 
-deinit方法中执行的方法包括：
+**deinit**方法中执行的方法包括：
 
 1. a_Clear：销毁时执行
 
@@ -317,7 +319,9 @@ bindablesTo(_ o: Array<Dictionary<String, String>>)
 
 `bindableTo`、`bindalbesTo`，负责接收更新数据。
 
-**TestView**使用方法如下：
+**TestView**
+
+示例代码：
 
 ```swift
 import UIKit
@@ -371,7 +375,9 @@ class TestView: AView {
 }
 ```
 
-**TestVM**使用方法如下：
+**TestVM**
+
+示例代码：
 
 ```swift
 import Foundation
@@ -428,11 +434,12 @@ A.ui.activityIndicatorView//=UIActivityIndicatorView()
 A.ui.webView//=WKWebView()
 A.ui.progressView//=UIProgressView()
 A.ui.alert//=UIAlertController(title: "", message: "", preferredStyle: .alert)
+A.ui.mapView//=MKMapView()
 ```
 
 属性主要用于在UIView中快速的初始化UI控件。
 
-创建方式如下：
+示例代码：
 
 ```swift
 import UIKit
@@ -609,7 +616,7 @@ func equalScreenHeight(_ offset: CGFloat=0.0)
 
 当两个控件间有多个属性相同，可以采用批量布局的方法
 
-方法如下：
+示例代码：
 
 ```swift
 private let testLabel: UILabel = A.ui.lable
@@ -628,6 +635,7 @@ override func a_Layout() {
         .top,
         .left
     ])
+    ...
 }
 ```
 
@@ -680,16 +688,17 @@ override func a_UIConfig() {
     let uiArray: [UIView] = [testButton, testLabel]
     uiArray.layerCornerRadius(8.0)
     uiArray.backgroundColor(0xFFFFFF.toColor)
+    ...
 }
 ```
 
-支持批量设置的方法参见：**Array++.swift**
+支持批量设置的方法参见：**Array++**
 
 ## UI控件的添加和删除
 
 框架支持单独添加UI控件和批量添加UI控件。在实际开发中，建议使用批量添加UI控件的方法。
 
-示例：
+示例代码：
 
 ```swift
 private let testLabel: UILabel = A.ui.lable
@@ -707,7 +716,7 @@ override func a_UI() {
 
 UITableViewCell也支持单独添加UI控件和批量添加UI控件。在实际开发中，建议使用批量添加UI控件的方法。
 
-示例：
+示例代码：
 
 ```swift
 private let testLabel: UILabel = A.ui.lable
@@ -762,7 +771,7 @@ public func navigation_RigthBarButtonSelector(executeBlock: (() -> Void)?)
 
 `DesignColorProtocol`协议提供了标准的颜色定义。详细请查看**DesignColorProtocol**中的定义。
 
-主题类示例：
+示例代码：
 
 ```swift
 import UIKit
@@ -880,7 +889,7 @@ class MainView: AView {
 
 # 格式转换
 
-框架提供大部分的格式想换转换的简写方法。
+框架提供大部分的格式相互转换的简写方法。
 
 示例代码：
 
@@ -959,9 +968,9 @@ let image: UIImage? = data.toImage()
 
 建议此类功能代码放到**a_Observe**中
 
-代码示例：
-
 **TestVM**
+
+示例代码：
 
 ```swift
 import Aquarius
@@ -975,6 +984,8 @@ class TestVM: AViewModel {
 ```
 
 **TestVC**
+
+示例代码：
 
 ```swift
 import Aquarius
@@ -1027,9 +1038,9 @@ public static let delegateAndDataSource: [String]
 
 建议在`Controller`中使用。
 
-示例代码：
-
 **TestView**
+
+示例代码：
 
 ```swift
 class TestView: AView {
@@ -1039,6 +1050,8 @@ class TestView: AView {
 ```
 
 **TestVC**
+
+示例代码：
 
 ```swift
 class TestVC: AViewController {
@@ -1109,9 +1122,9 @@ func Manage_PostNotifications(_ notificationNames: [String], objects: [[String :
 func ANotificationReceive(notification: Notification)
 ```
 
-示例代码：
-
 **TestView**
+
+示例代码：
 
 ```swift
 class TestView: AView {
@@ -1132,6 +1145,8 @@ class TestView: AView {
 ```
 
 **TestVM**
+
+示例代码：
 
 ```swift
 class TestVM: AViewModel {

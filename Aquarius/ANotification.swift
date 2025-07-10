@@ -18,7 +18,7 @@ import Foundation
 /// ])
 /// `
 open class ANotification: NSObject {
-    static let kANotificationData: String = "a_notification_data"
+    public static let kANotificationData: String = "a_notification_data"
     static let kANotificationInThread_Name: String = "a_notification_in_thread_name"
     static let kANotification_OnceTag: String = "a_notification_once_tag"
     

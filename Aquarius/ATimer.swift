@@ -10,6 +10,9 @@ import Foundation
 open class ATimer {
     var timer: Timer?
     private var count: Int
+    public var hour: Int = 0
+    public var minute: Int = 0
+    public var second: Int = 0
     
     public init(_ date: Date?=nil) {
         count = (date == nil) ? 0 : date!.toSecondsBetween(Date())
@@ -42,22 +45,26 @@ open class ATimer {
         AGCD.async(task: { [weak self] in
             if self!.count < 60 {
                 time = self!.count < 10 ? "00:00:0\(self!.count)" : "00:00:\(self!.count)"
+                self?.hour = 0
+                self?.minute = 0
+                self?.second = self!.count
             } else if self!.count >= 60 && self!.count < 3600 {
-                let second: Int = self!.count % 60
-                let minute: Int = Int(self!.count / 60)
+                self?.second = self!.count % 60
+                self?.minute = Int(self!.count / 60)
+                self?.hour = 0
                 
-                let secondString: String = second < 10 ? "0\(second)" : "\(second)"
-                let minuteString: String = minute < 10 ? "0\(minute)" : "\(minute)"
+                let secondString: String = self!.second < 10 ? "0\(self!.second)" : "\(self!.second)"
+                let minuteString: String = self!.minute < 10 ? "0\(self!.minute)" : "\(self!.minute)"
                 
                 time = "00:" + minuteString + ":" + secondString
             } else if self!.count >= 3600 {
-                let hour: Int = Int(self!.count / 3600)
-                let minute: Int = Int((self!.count % 3600) / 60)
-                let second: Int = Int((self!.count % 3600) % 60)
+                self?.hour = Int(self!.count / 3600)
+                self?.minute = Int((self!.count % 3600) / 60)
+                self?.second = Int((self!.count % 3600) % 60)
                 
-                let hourString: String = hour < 10 ? "0\(hour)" : "\(hour)"
-                let secondString: String = second < 10 ? "0\(second)" : "\(second)"
-                let minuteString: String = minute < 10 ? "0\(minute)" : "\(minute)"
+                let hourString: String = self!.hour < 10 ? "0\(self!.hour)" : "\(self!.hour)"
+                let secondString: String = self!.second < 10 ? "0\(self!.second)" : "\(self!.second)"
+                let minuteString: String = self!.minute < 10 ? "0\(self!.minute)" : "\(self!.minute)"
                 
                 time = hourString + ":" + minuteString + ":" + secondString
             }
@@ -66,29 +73,5 @@ open class ATimer {
                 block!(time)
             }
         }
-        /*
-        if count < 60 {
-            time = count < 10 ? "00:00:0\(count)" : "00:00:\(count)"
-        } else if count >= 60 && count < 3600 {
-            let second: Int = count % 60
-            let minute: Int = Int(count / 60)
-            
-            let secondString: String = second < 10 ? "0\(second)" : "\(second)"
-            let minuteString: String = minute < 10 ? "0\(minute)" : "\(minute)"
-            
-            time = "00:" + minuteString + ":" + secondString
-        } else if count >= 3600 {
-            let hour: Int = Int(count / 3600)
-            let minute: Int = Int((count % 3600) / 60)
-            let second: Int = Int((count % 3600) % 60)
-            
-            let hourString: String = hour < 10 ? "0\(hour)" : "\(hour)"
-            let secondString: String = second < 10 ? "0\(second)" : "\(second)"
-            let minuteString: String = minute < 10 ? "0\(minute)" : "\(minute)"
-            
-            time = hourString + ":" + minuteString + ":" + secondString
-        }
-        return time
-         */
     }
 }
