@@ -18,7 +18,8 @@ open class ALocation: NSObject {
     private var requestType: ALocationRequestType = .whenInUse
     public var updateHandler: ((_ locations: [CLLocation]) -> Void)? = nil
     public var failHandler: ((_ error: Error) -> Void)? = nil
-    public var reverseGeocodeHandler:((_ placemark: [CLPlacemark]) -> Void)? = nil
+    public var reverseGeocodeHandler: ((_ placemark: [CLPlacemark]) -> Void)? = nil
+    public var authorized: ((_ status: CLAuthorizationStatus) -> Void)? = nil
     
     deinit {
         updateHandler = nil
@@ -34,8 +35,12 @@ open class ALocation: NSObject {
         setupLocation(.whenInUse, kCLLocationAccuracyBest, 10)
     }
     
-    public init(_ requestType: ALocationRequestType = .whenInUse, _ desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyBest, _ distanceFilter: CLLocationDistance = 10) {
+    public init(_ requestType: ALocationRequestType = .whenInUse, _ desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyBest, _ distanceFilter: CLLocationDistance = 10, authorized: ((_ status: CLAuthorizationStatus) -> Void)? = nil) {
         super.init()
+        
+        if authorized != nil {
+            self.authorized = authorized
+        }
         
         setupLocation(requestType, desiredAccuracy, distanceFilter)
     }
@@ -122,9 +127,15 @@ extension ALocation: CLLocationManagerDelegate {
         switch status {
             case .authorizedAlways, .authorizedWhenInUse:
                 // do what is needed if you have access to location
+            if authorized != nil {
+                authorized!(status)
+            }
             break
             case .denied, .restricted:
                 // do what is needed if you have no access to location
+            if authorized != nil {
+                authorized!(status)
+            }
             break
             case .notDetermined:
                 switch requestType {

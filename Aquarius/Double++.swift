@@ -28,6 +28,9 @@ extension Double {
     public func toString(_ format: String="%.02f") -> String {
         String(format: format, self)
     }
+    public var toTimeInterval: TimeInterval {
+        TimeInterval(self)
+    }
     //生成带有价格的 String 字符串
     public func toPrice(currency: String) -> String {
         let nf = NumberFormatter()

@@ -58,6 +58,10 @@ extension Int {
     public var toNumber: NSNumber {
         NSNumber(integerLiteral: self)
     }
+    
+    public var toTimeInterval: TimeInterval {
+        TimeInterval(self)
+    }
 }
 
 precedencegroup AlphaPrecedence {

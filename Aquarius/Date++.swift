@@ -210,6 +210,24 @@ extension Date {
     public func toLongChineseFormatterString() -> String {
         return  "yyyy年MM月dd日 HH:mm:ss"
     }
+    /// 返回当前日期之后多少秒的日期
+    /// - Parameter second: 秒
+    /// - Returns: 新日期
+    public func toAfterSecond(second: TimeInterval) -> Date {
+        return addingTimeInterval(second)
+    }
+    /// 返回当前日期之后多少分钟的日期
+    /// - Parameter minute: 分
+    /// - Returns: 新日期
+    public func toAfterMinute(minute: TimeInterval) -> Date {
+        return toAfterSecond(second: minute * 60)
+    }
+    /// 返回当前日期之后多少小时的日期
+    /// - Parameter Hour: 小时
+    /// - Returns: 新日期
+    public func toAfterHour(Hour: TimeInterval) -> Date {
+        return toAfterSecond(second: Hour * 60 * 60)
+    }
     
     public func getStartDateOfMonth() -> Date {
         let yearAndMonth: String = toString(formatter: "yyyy-MM")

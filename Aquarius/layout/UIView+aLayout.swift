@@ -634,7 +634,7 @@ extension UIView {
     }
     
     public func center(y: CGFloat, animate: Bool = false, duration: TimeInterval = UIView.a_duration) {
-        self.y(y: (y - height()) / 2, animate: animate, duration: duration)
+        self.y(y: (y + height()) / 2, animate: animate, duration: duration)
     }
     
     public static func center(y: CGFloat, animate: Bool = false, duration: TimeInterval = UIView.a_duration, views: Array<UIView>) {

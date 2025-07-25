@@ -12,6 +12,7 @@ open class ACollectionViewCell: UICollectionViewCell, ANotificationDelegate {
     private var notification: ANotification?
     
     deinit {
+        a_InternalClear()
         a_Clear()
     }
     
@@ -47,12 +48,24 @@ open class ACollectionViewCell: UICollectionViewCell, ANotificationDelegate {
     
     open func a_Preview() {}
     open func a_Begin() {}
-    open func a_Clear() {
-        self.clearBind()
+    private func a_InternalClear() {
+        notification?.clearNotifications()
+        notification?.delegate = nil
         
-        self.notification?.removeNotification(notificationName: AThemeStyle.kNotification_UpdateThemeStyle)
-        self.notification?.delegate = nil
+        var bindObjects: [Any] = []
+        let mirror = Mirror(reflecting: self)
+        for children in mirror.children {
+            if ABindable.checkBind(children.value) {
+                bindObjects.append(children.value)
+            }
+            
+            if children.value is UIControl {
+                (children.value as! UIControl).checkAndRemoveAllEventBlock()
+            }
+        }
+        clearBinds(objects: bindObjects)
     }
+    open func a_Clear() {}
     
     open func a_UI() {}
     open func a_UIConfig() {}

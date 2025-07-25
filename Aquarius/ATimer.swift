@@ -16,6 +16,7 @@ open class ATimer {
     
     public init(_ date: Date?=nil) {
         count = (date == nil) ? 0 : date!.toSecondsBetween(Date())
+        calculateTime()
     }
     /// 开始计时
     /// - Parameters:
@@ -38,7 +39,14 @@ open class ATimer {
     /// 停止计时
     public func stop() {
         timer?.invalidate()
+        
+        count = 0
+        hour = 0
+        minute = 0
+        second = 0
     }
+    /// 更新时间（回调函数输出样式00:00:00）
+    /// - Parameter block: 回调函数
     public func updateTime(_ block: ((_ timeString: String) -> Void)?=nil) {
         var time: String = ""
         
@@ -72,6 +80,22 @@ open class ATimer {
             if block != nil {
                 block!(time)
             }
+        }
+    }
+    
+    private func calculateTime() {
+        if count < 60 {
+            hour = 0
+            minute = 0
+            second = count
+        } else if count >= 60 && count < 3600 {
+            second = count % 60
+            minute = Int(count / 60)
+            hour = 0
+        } else if count >= 3600 {
+            hour = Int(count / 3600)
+            minute = Int((count % 3600) / 60)
+            second = Int((count % 3600) % 60)
         }
     }
 }

@@ -128,4 +128,13 @@ extension Dictionary {
         let obj = self as? [String : Any]
         return obj![keyString] as! UIImage
     }
+    
+    public func getColorValue(_ at: Int = 0) -> UIColor {
+        return getValue(at) as! UIColor
+    }
+    
+    public func getColorValue(_ keyString: String) -> UIColor {
+        let obj = self as? [String : Any]
+        return obj![keyString] as! UIColor
+    }
 }

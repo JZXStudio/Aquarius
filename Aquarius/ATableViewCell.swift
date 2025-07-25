@@ -24,8 +24,7 @@ open class ATableViewCell: UITableViewCell, ANotificationDelegate {
     public var a_inset: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     
     deinit {
-        notification?.delegate = nil
-        
+        a_InternalClear()
         a_Clear()
     }
     
@@ -91,6 +90,24 @@ open class ATableViewCell: UITableViewCell, ANotificationDelegate {
     /// }
     /// ```
     open func a_Begin() {}
+    
+    private func a_InternalClear() {
+        notification?.clearNotifications()
+        notification?.delegate = nil
+        
+        var bindObjects: [Any] = []
+        let mirror = Mirror(reflecting: self)
+        for children in mirror.children {
+            if ABindable.checkBind(children.value) {
+                bindObjects.append(children.value)
+            }
+            
+            if children.value is UIControl {
+                (children.value as! UIControl).checkAndRemoveAllEventBlock()
+            }
+        }
+        clearBinds(objects: bindObjects)
+    }
     /// 页面销毁时执行的方法
     ///
     /// 示例：
@@ -106,12 +123,7 @@ open class ATableViewCell: UITableViewCell, ANotificationDelegate {
     ///     }
     /// }
     /// ```
-    open func a_Clear() {
-        self.clearBind()
-        
-        self.notification?.clearNotifications()
-        self.notification?.delegate = nil
-    }
+    open func a_Clear() {}
     /// 设置UI的方法
     ///
     /// __在此方法中完成UI控件的加载__

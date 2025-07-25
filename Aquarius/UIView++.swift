@@ -529,7 +529,6 @@ extension UIView {
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = (direction == .Horizontal) ? point_H : point_V
         gradient.drawsAsynchronously = true
-        
         self.layer.insertSublayer(gradient, at: 0)
     }
     /*
@@ -1512,5 +1511,34 @@ extension UIView {
         for currentView: UIView in views {
             currentView.decodeRestorableState(with: coder)
         }
+    }
+    /// 设置毛玻璃效果
+    /// - Parameters:
+    ///   - enabled: 是否有毛玻璃效果
+    ///   - style: 效果类型
+    public func blurEnabled(enabled: Bool=true, style: UIBlurEffect.Style = .light) {
+        let effectView: UIVisualEffectView? = viewWithTag(1111) as? UIVisualEffectView
+        if effectView != nil {
+            effectView!.removeFromSuperview()
+        }
+        if enabled {
+            let blurEffect = UIBlurEffect(style: style)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            blurEffectView.frame = self.bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            insertSubview(blurEffectView, at: 1111)
+        }
+    }
+    /// 设置浅色系毛玻璃效果
+    public func blurLightEnabled() {
+        blurEnabled()
+    }
+    /// 设置深色系毛玻璃效果
+    public func blurDarkEnabled() {
+        blurEnabled(style: .dark)
+    }
+    /// 去除毛玻璃效果
+    public func blurUnEnabled() {
+        blurEnabled(enabled: false)
     }
 }
