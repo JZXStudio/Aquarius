@@ -299,3 +299,81 @@ extension Array<UILabel> {
         }
     }
 }
+
+extension Array<UITextField> {
+    public func text(_ texts: Array<String>) {
+        var index: Int = 0
+        for textfield: UITextField in self {
+            textfield.text = texts.getString(index)
+            index = index + 1
+        }
+    }
+    
+    public func textColor(_ textColor: UIColor) {
+        for textfield: UITextField in self {
+            textfield.textColor = textColor
+        }
+    }
+    
+    public func textColor(_ textColors: [UIColor]) {
+        var i: Int = 0
+        for textfield: UITextField in self {
+            textfield.textColor = textColors[i]
+            i++
+        }
+    }
+    
+    public func textAligment(_ textAligment: NSTextAlignment) {
+        for textfield: UITextField in self {
+            textfield.textAlignment = textAligment
+        }
+    }
+    
+    public func textLeftAlignment() {
+        for textfield: UITextField in self {
+            textfield.textAlignment = .left
+        }
+    }
+    
+    public func textCenterAlignment() {
+        for textfield: UITextField in self {
+            textfield.textAlignment = .center
+        }
+    }
+    
+    public func textRightAlignment() {
+        for textfield: UITextField in self {
+            textfield.textAlignment = .right
+        }
+    }
+    
+    public func textNaturalAlignment() {
+        for textfield: UITextField in self {
+            textfield.textAlignment = .natural
+        }
+    }
+    
+    public func textJustifiedAlignment() {
+        for textfield: UITextField in self {
+            textfield.textAlignment = .justified
+        }
+    }
+    
+    public func font(_ font: UIFont) {
+        for textfield: UITextField in self {
+            textfield.font = font
+        }
+    }
+    
+    public func placeholder(_ placeholder: String) {
+        for textfield: UITextField in self {
+            textfield.placeholder = placeholder
+        }
+    }
+    
+    public func placeholderColor(_ placeholderColor: UIColor) {
+        for textfield: UITextField in self {
+            textfield.placeHolderColor = placeholderColor
+        }
+    }
+}

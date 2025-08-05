@@ -15,6 +15,15 @@ extension Notification {
     }
     /// 获取传递的对象
     ///
+    /// **Note: 此方法针对在ANotification中传递的字典的Key为ANotification.kANotificationData的情况。自行组装的参数，请使用<doc:objectValue(_:)>方法**
+    ///
+    /// - Returns: 对应的value
+    public func objectValue() -> Any {
+        let dict: [String : Any] = self.object as! [String : Any]
+        return dict[ANotification.kANotificationData] as Any
+    }
+    /// 获取传递的对象
+    ///
     /// **Note: 此方法不安全，传递的值必须为[String : Any]的字典**
     ///
     /// - Parameter key: key值

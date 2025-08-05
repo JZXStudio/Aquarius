@@ -55,9 +55,9 @@ open class ACollectionViewCell: UICollectionViewCell, ANotificationDelegate {
         var bindObjects: [Any] = []
         let mirror = Mirror(reflecting: self)
         for children in mirror.children {
-            if ABindable.checkBind(children.value) {
-                bindObjects.append(children.value)
-            }
+//            if ABindable.checkBind(children.value) {
+//                bindObjects.append(children.value)
+//            }
             
             if children.value is UIControl {
                 (children.value as! UIControl).checkAndRemoveAllEventBlock()

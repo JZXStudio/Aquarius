@@ -109,6 +109,14 @@ open class ANotification: NSObject {
     public static func PostNotification(notificationName: String, object: Dictionary<String, Any>?=nil) {
         NotificationCenter.default.post(name: Notification.Name(notificationName), object: object)
     }
+    /// 发送通知
+    /// - Parameters:
+    ///   - notificationName: 通知名称
+    ///   - object: 传递的通知对象
+    public static func PostNotification(notificationName: String, object: Any?=nil) {
+        let dict: [String : Any?] = [kANotificationData : object]
+        NotificationCenter.default.post(name: Notification.Name(notificationName), object: dict)
+    }
     /// 向主线程发送通知
     /// - Parameters:
     ///   - notificationName: 通知名称
@@ -118,7 +126,16 @@ open class ANotification: NSObject {
             NotificationCenter.default.post(name: Notification.Name(notificationName), object: object)
         }
     }
-    
+    /// 向主线程发送通知
+    /// - Parameters:
+    ///   - notificationName: 通知名称
+    ///   - object: 传递的通知对象
+    public static func PostMainNotification(notificationName: String, object: Any?=nil) {
+        let dict: [String : Any?] = [kANotificationData : object]
+        DispatchGroup().notify(queue: DispatchQueue.main) {
+            NotificationCenter.default.post(name: Notification.Name(notificationName), object: dict)
+        }
+    }
     public static func PostOnceNotification(notificationName: String, object: Dictionary<String, Any>) {
         var newObject: Dictionary<String, Any> = [:]
         if !object.isEmpty {

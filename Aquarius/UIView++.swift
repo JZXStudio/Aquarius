@@ -26,6 +26,7 @@ public enum ViewEqualProperty {
     case backgroundColor
     case isHidden
     case alpha
+    case radius
     case none
 }
 
@@ -80,6 +81,9 @@ extension UIView {
             case .rect:
                 view.frame(frame: self.frame())
                 break
+            case .radius:
+                view.layerCornerRadius(self.layer.cornerRadius)
+                break
             default:
                 break
             }
@@ -132,6 +136,9 @@ extension UIView {
             case .rect:
                 view.frame(frame: self.frame())
                 break
+            case .radius:
+                view.layerCornerRadius(self.layer.cornerRadius)
+                break
             default:
                 break
             }
@@ -183,6 +190,9 @@ extension UIView {
             case .rect:
                 self.frame(frame: view.frame())
                 break
+            case .radius:
+                self.layerCornerRadius(view.layer.cornerRadius)
+                break
             default:
                 break
             }
@@ -228,6 +238,9 @@ extension UIView {
                 break
             case .rect:
                 view.frame(frame: self.frame())
+                break
+            case .radius:
+                view.layerCornerRadius(self.layer.cornerRadius)
                 break
             default:
                 break
