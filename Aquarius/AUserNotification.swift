@@ -35,6 +35,7 @@ open class AUserNotification: NSObject {
                 }
             }
     }
+#if os(iOS)
     //获取通知设置
     public static func getSettings(_ completionHandler: @escaping (AUserNotificationSettings) -> Void) {
         current
@@ -51,6 +52,7 @@ open class AUserNotification: NSObject {
                 completionHandler(userNotificationSettings)
             }
     }
+#endif
     /*
      获取待推送的通知
      identifier:推送ID
@@ -583,10 +585,12 @@ public struct AUserNotificationSettings {
     .notSupported: 不支持
     */
     var alert: UNNotificationSetting
+#if os(iOS)
     /*
     .always: 始终显示预览
     .whenAuthenticated: 解锁时预览
     .never: 不预览
     */
     var previews: UNShowPreviewsSetting
+#endif
 }

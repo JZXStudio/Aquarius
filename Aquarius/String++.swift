@@ -298,18 +298,19 @@ extension String {
     public func getStringWidth(rectSize: CGSize,font: UIFont) -> CGFloat {
         self.getStringSize(rectSize: rectSize, font: font).width
     }
-    
+#if os(iOS)
     public func getStringWidth(height: CGFloat, font: UIFont) -> CGFloat {
         let screenWidth: CGFloat = UIScreen.main.bounds.width
         return self.getStringSize(rectSize: CGSizeMake(screenWidth-height, height), font: font).width
     }
-    
+#endif
     public func getStringHeight(rectSize: CGSize,font: UIFont) -> CGFloat {
         self.getStringSize(rectSize: rectSize, font: font).height
     }
-    
+#if os(iOS)
     public func getStringHeight(width: CGFloat,font: UIFont) -> CGFloat {
         let screenHeight: CGFloat = UIScreen.main.bounds.height
         return self.getStringSize(rectSize: CGSizeMake(width, screenHeight-width), font: font).height
     }
+#endif
 }

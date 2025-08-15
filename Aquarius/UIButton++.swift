@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/9/30.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -294,3 +294,5 @@ extension UIButton {
         }
     }
 }
+
+#endif

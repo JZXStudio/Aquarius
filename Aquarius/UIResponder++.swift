@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/9/7.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -26,3 +26,5 @@ extension UIResponder {
         return UITraitCollection.current.userInterfaceStyle
     }
 }
+
+#endif

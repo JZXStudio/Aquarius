@@ -46,9 +46,10 @@ public struct A {
     public static let kApplicationWillTerminate: String = "kApplicationWillTerminate"
     /// 后台回到前台时调用
     public static let kApplicationDidBecomeActive: String = "kApplicationDidBecomeActive"
-    
+#if os(iOS)
     /// 快速创建UI组件
     public static var ui: AUI = AUI.shared
+#endif
     /// 快速创建颜色实例
     public static var color: AColor = AColor.shared
     /// 快速创建图片实例
@@ -57,6 +58,10 @@ public struct A {
     public static var font: AFont = AFont.shared
     /// 快速创建本地存储实例
     public static var userDefaults: AUserDefaults = AUserDefaults.shared
+    /// 快速创建本地存储实例（支持appGroups）
+    public static func userDefaults(_ appGroups: String) -> AUserDefaults {
+        return AUserDefaults(appGroups: appGroups)
+    }
     /// 快速创建日历实例
     public static var calendar: ACalendar = ACalendar.shared
     /// 快速创建日历事件实例

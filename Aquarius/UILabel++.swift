@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/9/20.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -602,3 +602,5 @@ extension UILabel {
         self.font = UIFont.boldSystemFont(ofSize: size)
     }
 }
+
+#endif

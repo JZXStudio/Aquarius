@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/9/15.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 /// tableViewCell的基类
@@ -95,18 +95,12 @@ open class ATableViewCell: UITableViewCell, ANotificationDelegate {
         notification?.clearNotifications()
         notification?.delegate = nil
         
-        var bindObjects: [Any] = []
         let mirror = Mirror(reflecting: self)
         for children in mirror.children {
-//            if ABindable.checkBind(children.value) {
-//                bindObjects.append(children.value)
-//            }
-            
             if children.value is UIControl {
                 (children.value as! UIControl).checkAndRemoveAllEventBlock()
             }
         }
-        clearBinds(objects: bindObjects)
     }
     /// 页面销毁时执行的方法
     ///
@@ -402,3 +396,5 @@ open class ATableViewCell: UITableViewCell, ANotificationDelegate {
         }
     }
 }
+
+#endif

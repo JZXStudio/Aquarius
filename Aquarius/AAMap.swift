@@ -4,6 +4,7 @@
 //
 //  Created by SONG JIN on 2025/7/8.
 //
+#if os(iOS)
 import MapKit
 import Foundation
 
@@ -91,3 +92,5 @@ public struct AQQMap {
         }
     }
 }
+
+#endif

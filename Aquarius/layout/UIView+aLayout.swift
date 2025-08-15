@@ -4,6 +4,7 @@
 //
 //  Created by SONG JIN on 2025/4/24.
 //
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -1318,3 +1319,5 @@ extension UIView {
         return tabBarVC.tabBar.height()
     }
 }
+
+#endif

@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/8/26.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -1555,3 +1555,5 @@ extension UIView {
         blurEnabled(enabled: false)
     }
 }
+
+#endif

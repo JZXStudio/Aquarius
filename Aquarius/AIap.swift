@@ -257,6 +257,7 @@ open class AIap {
         }
          */
     }
+#if os(iOS)
     /// 应用内弹出管理订阅类商品的界面
     /// - Parameter windowScene: scene
     public func showManageSubscriptions() async throws {
@@ -276,6 +277,59 @@ open class AIap {
             throw AIapError.NoProduct
         }
     }
+    /// 退款
+    /// - Parameters:
+    ///   - productID: 订阅的产品ID
+    /// - Returns: 退款状态
+    public func refundProduct(_ productID: String) async throws -> RefundState {
+
+        guard let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return .Unknown
+        }
+        
+        guard case .verified(let transaction) = await Transaction.latest(for: productID) else {
+            return .Unknown
+        }
+        
+        do {
+            let res = try await transaction.beginRefundRequest(in: windowScene)
+            switch res {
+            case .userCancelled:
+                // Customer cancelled refund request.
+                print("用户取消退款。")
+                if refundStateBlock != nil {
+                    refundStateBlock(RefundState.Cancel,nil)
+                }
+                
+                return .Cancel
+            case .success:
+                print("退款提交成功。")
+                // Refund request was successfully submitted.
+                if refundStateBlock != nil {
+                    refundStateBlock(RefundState.Success,nil)
+                }
+                
+                return .Success
+            @unknown default:
+                print("退款返回错误：未知")
+                if refundStateBlock != nil {
+                    refundStateBlock(RefundState.Unknown,nil)
+                }
+                
+                return .Unknown
+            }
+        } catch StoreKit.Transaction.RefundRequestError.duplicateRequest {
+            print("退款请求错误：重复请求")
+            throw RefundError.Duplicate
+        } catch StoreKit.Transaction.RefundRequestError.failed {
+            print("退款请求错误：失败")
+            throw RefundError.Fail
+        } catch {
+            print("退款请求错误：其他")
+            throw RefundError.Other
+        }
+    }
+#endif
     /// 购买某个产品
     /// - Parameter productID: 产品ID
     /// - Returns: 购买结果
@@ -338,57 +392,6 @@ open class AIap {
                 iapStateBlock(.Unowned, nil)
             }
             return nil
-        }
-    }
-    /// 退款
-    /// - Parameters:
-    ///   - productID: 订阅的产品ID
-    /// - Returns: 退款状态
-    public func refundProduct(_ productID: String) async throws -> RefundState {
-        guard let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-            return .Unknown
-        }
-        
-        guard case .verified(let transaction) = await Transaction.latest(for: productID) else {
-            return .Unknown
-        }
-        
-        do {
-            let res = try await transaction.beginRefundRequest(in: windowScene)
-            switch res {
-            case .userCancelled:
-                // Customer cancelled refund request.
-                print("用户取消退款。")
-                if refundStateBlock != nil {
-                    refundStateBlock(RefundState.Cancel,nil)
-                }
-                
-                return .Cancel
-            case .success:
-                print("退款提交成功。")
-                // Refund request was successfully submitted.
-                if refundStateBlock != nil {
-                    refundStateBlock(RefundState.Success,nil)
-                }
-                
-                return .Success
-            @unknown default:
-                print("退款返回错误：未知")
-                if refundStateBlock != nil {
-                    refundStateBlock(RefundState.Unknown,nil)
-                }
-                
-                return .Unknown
-            }
-        } catch StoreKit.Transaction.RefundRequestError.duplicateRequest {
-            print("退款请求错误：重复请求")
-            throw RefundError.Duplicate
-        } catch StoreKit.Transaction.RefundRequestError.failed {
-            print("退款请求错误：失败")
-            throw RefundError.Fail
-        } catch {
-            print("退款请求错误：其他")
-            throw RefundError.Other
         }
     }
     // 校验

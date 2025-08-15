@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/9/14.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -476,3 +476,5 @@ extension UITextField {
         self.size(size: size)
     }
 }
+
+#endif

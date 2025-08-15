@@ -4,7 +4,6 @@
 //
 //  Created by SONG JIN on 2022/10/26.
 //
-
 import UIKit
 import Foundation
 import CoreLocation
@@ -42,12 +41,12 @@ extension Array {
         return get(at) as! Bool
     }
     
-    public func getColor(_ at: Int) -> UIColor {
-        return get(at) as! UIColor
-    }
-    
     public func getDate(_ at: Int) -> Date {
         return get(at) as! Date
+    }
+    
+    public func getColor(_ at: Int) -> UIColor {
+        return get(at) as! UIColor
     }
     
     public func getFont(_ at: Int) -> UIFont {
@@ -57,7 +56,7 @@ extension Array {
     public func getImage(_ at: Int) -> UIImage {
         return get(at) as! UIImage
     }
-    
+#if os(iOS)
     public func getView(_ at: Int) -> UIView {
         return get(at) as! UIView
     }
@@ -69,7 +68,7 @@ extension Array {
     public func getImageView(_ at: Int) -> UIImageView {
         return get(at) as! UIImageView
     }
-    
+#endif
     public func getLocationDegrees(_ at: Int) -> CLLocationDegrees {
         return get(at) as! CLLocationDegrees
     }
@@ -86,7 +85,7 @@ extension Array {
         object.setValue(attributeValue, forKey: attributeKey)
     }
 }
-
+#if os(iOS)
 extension Array<UIView> {
     public func alpha(_ alpha: CGFloat) {
         for currentView: UIView in self {
@@ -300,80 +299,4 @@ extension Array<UILabel> {
     }
 }
 
-extension Array<UITextField> {
-    public func text(_ texts: Array<String>) {
-        var index: Int = 0
-        for textfield: UITextField in self {
-            textfield.text = texts.getString(index)
-            index = index + 1
-        }
-    }
-    
-    public func textColor(_ textColor: UIColor) {
-        for textfield: UITextField in self {
-            textfield.textColor = textColor
-        }
-    }
-    
-    public func textColor(_ textColors: [UIColor]) {
-        var i: Int = 0
-        for textfield: UITextField in self {
-            textfield.textColor = textColors[i]
-            i++
-        }
-    }
-    
-    public func textAligment(_ textAligment: NSTextAlignment) {
-        for textfield: UITextField in self {
-            textfield.textAlignment = textAligment
-        }
-    }
-    
-    public func textLeftAlignment() {
-        for textfield: UITextField in self {
-            textfield.textAlignment = .left
-        }
-    }
-    
-    public func textCenterAlignment() {
-        for textfield: UITextField in self {
-            textfield.textAlignment = .center
-        }
-    }
-    
-    public func textRightAlignment() {
-        for textfield: UITextField in self {
-            textfield.textAlignment = .right
-        }
-    }
-    
-    public func textNaturalAlignment() {
-        for textfield: UITextField in self {
-            textfield.textAlignment = .natural
-        }
-    }
-    
-    public func textJustifiedAlignment() {
-        for textfield: UITextField in self {
-            textfield.textAlignment = .justified
-        }
-    }
-    
-    public func font(_ font: UIFont) {
-        for textfield: UITextField in self {
-            textfield.font = font
-        }
-    }
-    
-    public func placeholder(_ placeholder: String) {
-        for textfield: UITextField in self {
-            textfield.placeholder = placeholder
-        }
-    }
-    
-    public func placeholderColor(_ placeholderColor: UIColor) {
-        for textfield: UITextField in self {
-            textfield.placeHolderColor = placeholderColor
-        }
-    }
-}
+#endif

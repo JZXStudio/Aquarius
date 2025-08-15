@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/6/18.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 /// 导航条按钮类型
@@ -215,13 +215,13 @@ open class AViewController: UIViewController, ANotificationDelegate {
         }
     }
     /// 导航条-点击左侧按钮后执行的回调方法
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     self.navigation_LeftBarButtonSelector {
     ///         printLog("leftButtonClick")
     ///     }
@@ -471,18 +471,12 @@ open class AViewController: UIViewController, ANotificationDelegate {
         notification.clearNotifications()
         notification.delegate = nil
         
-        var bindObjects: [Any] = []
         let mirror = Mirror(reflecting: self)
         for children in mirror.children {
-//            if ABindable.checkBind(children.value) {
-//                bindObjects.append(children.value)
-//            }
-            
             if children.value is UIControl {
                 (children.value as! UIControl).checkAndRemoveAllEventBlock()
             }
         }
-        clearBinds(objects: bindObjects)
     }
     /// 页面销毁时执行的方法
     ///
@@ -711,15 +705,15 @@ open class AViewController: UIViewController, ANotificationDelegate {
     open func a_Inject() {}
     //默认设置加入的view为全屏
     /// 加入view方法
-    /// 
+    ///
     /// __默认设置加入的view为全屏__
-    /// 
+    ///
     /// 示例：
     ///
     /// ```swift
     /// override func a_UI() {
     ///     super.a_UI()
-    /// 
+    ///
     ///     addRootView(view: a_view)
     /// }
     /// ```
@@ -954,13 +948,13 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.isPresent = isPresent
     }
     /// 设置导航条-标题方法
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     self.navigation_Title("标题")
     /// }
     /// ```
@@ -969,15 +963,15 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_Title = navigation_Title
     }
     /// 设置导航条-标题的view方法
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     let titleView: UIView = A.ui.view
-    /// 
+    ///
     ///     self.navigation_TitleView(titleView)
     /// }
     /// ```
@@ -986,24 +980,24 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_TitleView = navigation_TitleView
     }
     /// 设置导航条-左侧按钮方法
-    /// 
+    ///
     /// 设置此选项后，左侧按钮将变为按钮模式
-    /// 
+    ///
     /// 此属性与下列属性冲突，不能同时设置
-    /// 
+    ///
     /// + <doc:navigation_LeftBarButtonText>
     /// + <doc:navigation_LeftBarButtonText(_:)>
     /// + <doc:navigation_LeftBarButtonImage>
     /// + <doc:navigation_LeftBarButtonImage(_:)>
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     let button: UIButton = A.ui.button
-    /// 
+    ///
     ///     self.navigation_LeftBarButton = button
     /// }
     /// ```
@@ -1012,22 +1006,22 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_LeftBarButton = navigation_LeftBarButton
     }
     /// 设置导航条-左侧按钮的文本方法
-    /// 
+    ///
     /// 设置此选项后，左侧按钮将变为文本模式
-    /// 
+    ///
     /// 此属性与下列属性冲突，不能同时设置
-    /// 
+    ///
     /// + <doc:navigation_LeftBarButton>
     /// + <doc:navigation_LeftBarButton(_:)>
     /// + <doc:navigation_LeftBarButtonImage>
     /// + <doc:navigation_LeftBarButtonImage(_:)>
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     self.navigation_LeftBarButtonText("Test")
     /// }
     /// ```
@@ -1036,24 +1030,24 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_LeftBarButtonText = navigation_LeftBarButtonText
     }
     /// 设置导航条-左侧按钮的图片方法
-    /// 
+    ///
     /// 设置此选项后，左侧按钮将变为图片模式
-    /// 
+    ///
     /// 此属性与下列属性冲突，不能同时设置
-    /// 
+    ///
     /// + <doc:navigation_LeftBarButton>
     /// + <doc:navigation_LeftBarButton(_:)>
     /// + <doc:navigation_LeftBarButtonText>
     /// + <doc:navigation_LeftBarButtonText(_:)>
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     let image: UIImage = UIImage(systemName: "xmark")
-    /// 
+    ///
     ///     self.navigation_LeftBarButtonImage(image)
     /// }
     /// ```
@@ -1062,15 +1056,15 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_LeftBarButtonImage = navigation_LeftBarButtonImage
     }
     /// 设置导航条-左侧按钮的颜色方法
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     let color: UIColor = 0xFFFFFF.a_color
-    /// 
+    ///
     ///     self.navigation_LeftBarButtonTintColor(color)
     /// }
     /// ```
@@ -1079,16 +1073,16 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_LeftBarButtonTintColor = tintColor
     }
     /// 设置导航条-点击左侧按钮后执行的方法
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     self.navigation_LeftBarButtonAction(#Selector(leftButtonClick:))
     /// }
-    /// 
+    ///
     /// @objc
     /// func leftButtonClick(sender: UIControl) {
     ///     printLog("leftButtonClick")
@@ -1099,24 +1093,24 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_LeftBarButtonAction = navigation_LeftBarButtonAction
     }
     /// 设置导航条-右侧按钮方法
-    /// 
+    ///
     /// 设置此选项后，右侧按钮将变为按钮模式
-    /// 
+    ///
     /// 此属性与下列属性冲突，不能同时设置
-    /// 
+    ///
     /// + <doc:navigation_RightBarButtonText>
     /// + <doc:navigation_RightBarButtonText(_:)>
     /// + <doc:navigation_RightBarButtonImage>
     /// + <doc:navigation_RightBarButtonImage(_:)>
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     let button: UIButton = A.ui.button
-    /// 
+    ///
     ///    self.navigation_RightBarButton(button)
     /// }
     /// ```
@@ -1125,22 +1119,22 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_RightBarButton = navigation_RightBarButton
     }
     /// 设置导航条-右侧按钮的文本方法
-    /// 
+    ///
     /// 设置此选项后，右侧按钮将变为文本模式
-    /// 
+    ///
     /// 此属性与下列属性冲突，不能同时设置
-    /// 
+    ///
     /// + <doc:navigation_RightBarButton>
     /// + <doc:navigation_RightBarButton(_:)>
     /// + <doc:navigation_RightBarButtonImage>
     /// + <doc:navigation_RightBarButtonImage(_:)>
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     self.navigation_RightBarButtonText("Test")
     /// }
     /// ```
@@ -1149,24 +1143,24 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_RightBarButtonText = navigation_RightBarButtonText
     }
     /// 设置导航条-右侧按钮的图片方法
-    /// 
+    ///
     /// 设置此选项后，右侧按钮将变为图片模式
-    /// 
+    ///
     /// 此属性与下列属性冲突，不能同时设置
-    /// 
+    ///
     /// + <doc:navigation_RightBarButton>
     /// + <doc:navigation_RightBarButton(_:)>
     /// + <doc:navigation_RightBarButtonText>
     /// + <doc:navigation_RightBarButtonText(_:)>
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     let image: UIImage = UIImage(systemName: "xmark")
-    /// 
+    ///
     ///     self.navigation_RightBarButtonImage(image)
     /// }
     /// ```
@@ -1175,15 +1169,15 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_RightBarButtonImage = navigation_RightBarButtonImage
     }
     /// 设置导航条-右侧按钮的颜色方法
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     let color: UIColor = 0xFFFFFF.a_color
-    /// 
+    ///
     ///     self.navigation_RightBarButtonTintColor(color)
     /// }
     /// ```
@@ -1192,16 +1186,16 @@ open class AViewController: UIViewController, ANotificationDelegate {
         self.navigation_RightBarButtonTintColor = tintColor
     }
     /// 设置导航条-点击右侧按钮后执行的方法
-    /// 
+    ///
     /// 示例：
-    /// 
+    ///
     /// ```swift
     /// open override func a_Navigation() -> Void {
     ///     super.a_Navigation()
-    /// 
+    ///
     ///     self.navigation_RightBarButtonAction(#Selector(rightButtonClick:))
     /// }
-    /// 
+    ///
     /// @objc
     /// func rightButtonClick(sender: UIControl) {
     ///     printLog("rightButtonClick")
@@ -1223,3 +1217,5 @@ open class AViewController: UIViewController, ANotificationDelegate {
         }
     }
 }
+
+#endif

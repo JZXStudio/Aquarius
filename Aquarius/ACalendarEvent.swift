@@ -17,81 +17,10 @@ open class ACalendarEvent: NSObject {
     public static let shared = ACalendarEvent()
     
     let eventStore: EKEventStore = EKEventStore()
-
+#if os(iOS)
     public func openCalendarApp() {
         if UIApplication.shared.canOpenURL(URL(string:"calshow:")!) {
             UIApplication.shared.open(URL(string:"calshow:")!, options: [:], completionHandler: nil)
-        }
-    }
-    /*
-     startDate: 开始日期
-     endDate: 结束日期
-     isLocal: 是否获取本地，默认为false（所有的）
-     completion: 返回EKEvent数组
-     */
-    public func select(startDate: Date, endDate: Date, isLocal: Bool=false, completion: @escaping (([EKEvent]?) -> Void)) {
-        if !isLocal {
-            selectAll(
-                startDate: startDate,
-                endDate: endDate,
-                completion: completion
-            )
-        } else {
-            selectLocal(
-                startDate: startDate,
-                endDate: endDate,
-                completion: completion
-            )
-        }
-    }
-    /*
-     查找所有的日历事件
-     
-     startDate: 开始日期
-     endDate: 结束日期
-     completion: 返回EKEvent数组
-     */
-    public func selectAll(startDate: Date, endDate: Date, completion: @escaping (([EKEvent]?) -> Void)) {
-        eventStore.requestAccess(to: .event) { [weak self] ( granted, error ) in
-            if granted && error == nil {
-                let predicate = self?.eventStore.predicateForEvents(
-                    withStart: startDate,
-                    end: endDate,
-                    calendars: nil
-                )
-                
-                completion(self?.eventStore.events(matching: predicate!) as [EKEvent]?)
-            } else {
-                completion([])
-            }
-        }
-    }
-    /*
-     查找本地的日历事件
-     
-     startDate: 开始日期
-     endDate: 结束日期
-     completion: 返回EKEvent数组
-     */
-    public func selectLocal(startDate: Date, endDate: Date, completion: @escaping (([EKEvent]?) -> Void)) {
-        eventStore.requestAccess(to: .event) { [weak self] ( granted, error ) in
-            if granted && error == nil {
-                //获取本地日历（剔除节假日，生日等其他系统日历）
-                let calendars = self?.eventStore.calendars(for: .event).filter({
-                    (calender) -> Bool in
-                    return calender.type == .local || calender.type == .calDAV
-                })
-                
-                let predicate = self?.eventStore.predicateForEvents(
-                    withStart: startDate,
-                    end: endDate,
-                    calendars: calendars
-                )
-                
-                completion(self?.eventStore.events(matching: predicate!) as [EKEvent]?)
-            } else {
-                completion([])
-            }
         }
     }
     /*
@@ -163,6 +92,78 @@ open class ACalendarEvent: NSObject {
             //print(error)
         }
     }
+#endif
+    /*
+     startDate: 开始日期
+     endDate: 结束日期
+     isLocal: 是否获取本地，默认为false（所有的）
+     completion: 返回EKEvent数组
+     */
+    public func select(startDate: Date, endDate: Date, isLocal: Bool=false, completion: @escaping (([EKEvent]?) -> Void)) {
+        if !isLocal {
+            selectAll(
+                startDate: startDate,
+                endDate: endDate,
+                completion: completion
+            )
+        } else {
+            selectLocal(
+                startDate: startDate,
+                endDate: endDate,
+                completion: completion
+            )
+        }
+    }
+    /*
+     查找所有的日历事件
+     
+     startDate: 开始日期
+     endDate: 结束日期
+     completion: 返回EKEvent数组
+     */
+    public func selectAll(startDate: Date, endDate: Date, completion: @escaping (([EKEvent]?) -> Void)) {
+        eventStore.requestAccess(to: .event) { [weak self] ( granted, error ) in
+            if granted && error == nil {
+                let predicate = self?.eventStore.predicateForEvents(
+                    withStart: startDate,
+                    end: endDate,
+                    calendars: nil
+                )
+                
+                completion(self?.eventStore.events(matching: predicate!) as [EKEvent]?)
+            } else {
+                completion([])
+            }
+        }
+    }
+    /*
+     查找本地的日历事件
+     
+     startDate: 开始日期
+     endDate: 结束日期
+     completion: 返回EKEvent数组
+     */
+    public func selectLocal(startDate: Date, endDate: Date, completion: @escaping (([EKEvent]?) -> Void)) {
+        eventStore.requestAccess(to: .event) { [weak self] ( granted, error ) in
+            if granted && error == nil {
+                //获取本地日历（剔除节假日，生日等其他系统日历）
+                let calendars = self?.eventStore.calendars(for: .event).filter({
+                    (calender) -> Bool in
+                    return calender.type == .local || calender.type == .calDAV
+                })
+                
+                let predicate = self?.eventStore.predicateForEvents(
+                    withStart: startDate,
+                    end: endDate,
+                    calendars: calendars
+                )
+                
+                completion(self?.eventStore.events(matching: predicate!) as [EKEvent]?)
+            } else {
+                completion([])
+            }
+        }
+    }
     
     private func getCalendarEvent(_ dictionary: [ACalendarEventType : Any]) -> EKEvent {
         let event: EKEvent = EKEvent(eventStore: eventStore)
@@ -215,63 +216,10 @@ open class AReminderEvent: NSObject {
     public static let shared = AReminderEvent()
     
     let eventStore: EKEventStore = EKEventStore()
-    
+#if os(iOS)
     public func openReminderApp() {
         if UIApplication.shared.canOpenURL(URL(string:"x-apple-reminder://")!) {
             UIApplication.shared.open(URL(string:"x-apple-reminder://")!, options: [:], completionHandler: nil)
-        }
-    }
-    /*
-     startDate: 开始日期
-     endDate: 结束日期
-     isLocal: 是否获取本地，默认为false（所有的）
-     completion: 返回EKEvent数组
-     */
-    public func select(isLocal: Bool=false, completion: @escaping (([EKReminder]?) -> Void)) {
-        if !isLocal {
-            selectAll(completion)
-        } else {
-            selectLocal(completion)
-        }
-    }
-    /*
-     查找所有的日历事件
-     
-     startDate: 开始日期
-     endDate: 结束日期
-     completion: 返回EKEvent数组
-     */
-    public func selectAll(_ completion: @escaping (([EKReminder]?) -> Void)) {
-        eventStore.requestAccess(to: .reminder) { [weak self] ( granted, error ) in
-            if granted && error == nil {
-                let predicate = self?.eventStore.predicateForReminders(in: nil)
-                self?.eventStore.fetchReminders(matching: predicate!, completion: completion)
-            } else {
-                completion([])
-            }
-        }
-    }
-    /*
-     查找本地的日历事件
-     
-     startDate: 开始日期
-     endDate: 结束日期
-     completion: 返回EKEvent数组
-     */
-    public func selectLocal(_ completion: @escaping (([EKReminder]?) -> Void)) {
-        eventStore.requestAccess(to: .reminder) { [weak self] ( granted, error ) in
-            if granted && error == nil {
-                //获取本地日历（剔除节假日，生日等其他系统日历）
-                let calendars = self?.eventStore.calendars(for: .event).filter({
-                    (calender) -> Bool in
-                    return calender.type == .local || calender.type == .calDAV
-                })
-                
-                let predicate = self?.eventStore.predicateForReminders(in: calendars)
-                self?.eventStore.fetchReminders(matching: predicate!, completion: completion)
-            } else {
-                completion([])
-            }
         }
     }
     /*
@@ -338,6 +286,60 @@ open class AReminderEvent: NSObject {
             let _ = try eventStore.remove(reminder, commit: true)
         } catch {
             //print(error)
+        }
+    }
+#endif
+    /*
+     startDate: 开始日期
+     endDate: 结束日期
+     isLocal: 是否获取本地，默认为false（所有的）
+     completion: 返回EKEvent数组
+     */
+    public func select(isLocal: Bool=false, completion: @escaping (([EKReminder]?) -> Void)) {
+        if !isLocal {
+            selectAll(completion)
+        } else {
+            selectLocal(completion)
+        }
+    }
+    /*
+     查找所有的日历事件
+     
+     startDate: 开始日期
+     endDate: 结束日期
+     completion: 返回EKEvent数组
+     */
+    public func selectAll(_ completion: @escaping (([EKReminder]?) -> Void)) {
+        eventStore.requestAccess(to: .reminder) { [weak self] ( granted, error ) in
+            if granted && error == nil {
+                let predicate = self?.eventStore.predicateForReminders(in: nil)
+                self?.eventStore.fetchReminders(matching: predicate!, completion: completion)
+            } else {
+                completion([])
+            }
+        }
+    }
+    /*
+     查找本地的日历事件
+     
+     startDate: 开始日期
+     endDate: 结束日期
+     completion: 返回EKEvent数组
+     */
+    public func selectLocal(_ completion: @escaping (([EKReminder]?) -> Void)) {
+        eventStore.requestAccess(to: .reminder) { [weak self] ( granted, error ) in
+            if granted && error == nil {
+                //获取本地日历（剔除节假日，生日等其他系统日历）
+                let calendars = self?.eventStore.calendars(for: .event).filter({
+                    (calender) -> Bool in
+                    return calender.type == .local || calender.type == .calDAV
+                })
+                
+                let predicate = self?.eventStore.predicateForReminders(in: calendars)
+                self?.eventStore.fetchReminders(matching: predicate!, completion: completion)
+            } else {
+                completion([])
+            }
         }
     }
     

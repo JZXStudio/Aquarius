@@ -4,9 +4,10 @@
 //
 //  Created by SONG JIN on 2022/8/23.
 //
-
+#if os(iOS)
 import UIKit
 import MessageUI
+#endif
 import Foundation
 import LocalAuthentication
 
@@ -30,8 +31,9 @@ open class ACommon: NSObject {
               let projectName = info["CFBundleIdentifier"] as? String else { return "" }
         return projectName
     }
-    
+#if os(iOS)
     public static let kScreenSize: CGSize = UIScreen.main.bounds.size
+#endif
     //获取主工程中的bundle
     public static func GetMainResourceBundle(bundleName: String) -> Bundle? {
         return Bundle(path: Bundle.main.path(forResource: bundleName, ofType: "bundle")!)
@@ -110,6 +112,7 @@ open class ACommon: NSObject {
         }
         return Array()
     }
+#if os(iOS)
     /// 判断是touchID还是faceID还是opticID
     /// - Returns: 判断结果
     public static func isBiometryType() -> ACommonBiometryType {
@@ -165,11 +168,6 @@ open class ACommon: NSObject {
         
         return alertController
     }
-    /// 检测当前运行的是否是模拟器环境
-    /// - Returns: 是否模拟器环境
-    public static func isSimulator() -> Bool {
-        return ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
-    }
     /// 检测是否越狱
     /// - Returns: 是否越狱状态
     public static func isJailbroken() -> Bool {
@@ -202,32 +200,6 @@ open class ACommon: NSObject {
         let cydiaInstalled = UIApplication.shared.canOpenURL(URL(string: "cydia://")!)
         
         return isBreak || cydiaInstalled
-    }
-    /// 打开浏览器
-    /// - Parameter urlString: 浏览器地址
-    /// - Parameter error: 错误回调
-    public static func openBrowser(_ urlString: String, error: ((String) -> Void)? = nil) {
-        guard let url = URL(string: urlString) else {
-            if error != nil {
-                error!("打开浏览器失败")
-            }
-            return
-        }
-        
-        openURL(url, errorHandler: error)
-    }
-    /// 打电话
-    /// - Parameter phoneNumber: 电话号码
-    /// - Parameter error: 错误回调
-    public static func openPhoneCall(_ phoneNumber: String, error: ((String) -> Void)? = nil) {
-        guard let phoneCallURL = URL(string: "tel://\(phoneNumber)") else {
-            if error != nil {
-                error!("无法打电话")
-            }
-            return
-        }
-        
-        openURL(phoneCallURL)
     }
     
     private static func openURL(_ url: URL, errorHandler: ((String) -> Void)? = nil) {
@@ -289,5 +261,37 @@ open class ACommon: NSObject {
             
             return nil
         }
+    }
+    /// 打开浏览器
+    /// - Parameter urlString: 浏览器地址
+    /// - Parameter error: 错误回调
+    public static func openBrowser(_ urlString: String, error: ((String) -> Void)? = nil) {
+        guard let url = URL(string: urlString) else {
+            if error != nil {
+                error!("打开浏览器失败")
+            }
+            return
+        }
+        
+        openURL(url, errorHandler: error)
+    }
+    /// 打电话
+    /// - Parameter phoneNumber: 电话号码
+    /// - Parameter error: 错误回调
+    public static func openPhoneCall(_ phoneNumber: String, error: ((String) -> Void)? = nil) {
+        guard let phoneCallURL = URL(string: "tel://\(phoneNumber)") else {
+            if error != nil {
+                error!("无法打电话")
+            }
+            return
+        }
+        
+        openURL(phoneCallURL)
+    }
+#endif
+    /// 检测当前运行的是否是模拟器环境
+    /// - Returns: 是否模拟器环境
+    public static func isSimulator() -> Bool {
+        return ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
     }
 }

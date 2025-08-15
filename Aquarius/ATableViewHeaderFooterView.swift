@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2024/10/23.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -81,3 +81,5 @@ open class ATableViewHeaderFooterView: UITableViewHeaderFooterView, ANotificatio
         }
     }
 }
+
+#endif

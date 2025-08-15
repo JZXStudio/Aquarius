@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2023/12/18.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -36,3 +36,5 @@ extension UISearchBar {
         setImage(image, for: .search, state: .normal)
     }
 }
+
+#endif

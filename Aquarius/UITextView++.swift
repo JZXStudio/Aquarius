@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2024/4/22.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -237,3 +237,5 @@ extension UITextView {
         self.size(size: self.getTextSize())
     }
 }
+
+#endif

@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/10/3.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -157,3 +157,5 @@ extension UINavigationItem {
         rightBarButtonItem?.tintColor = tintColor
     }
 }
+
+#endif

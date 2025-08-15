@@ -9,8 +9,10 @@ import UIKit
 import Foundation
 
 open class AViewConfig: AViewBase {
+#if os(iOS)
     public let kScreenWidth: CGFloat = UIScreen.main.bounds.width
     public let kScreenHeight: CGFloat = UIScreen.main.bounds.height
+#endif
     
     override public init() {
         super.init()

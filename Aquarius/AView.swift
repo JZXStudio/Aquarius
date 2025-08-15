@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2021/6/12.
 //
-
+#if os(iOS)
 import UIKit
 /// view的基类（MVVM）
 ///
@@ -70,7 +70,7 @@ open class AView: UIView, ANotificationDelegate, ABindProcotol {
         }
     }
     /// 设置键盘自动隐藏
-    /// 
+    ///
     /// 默认：不开启
     /// - Parameter isKeyboardEnabled: 是否自动隐藏
     public func isKeyboardEnabled(_ isKeyboardEnabled: Bool=false) {
@@ -176,18 +176,12 @@ open class AView: UIView, ANotificationDelegate, ABindProcotol {
         }
         self.delegateManagers.removeAll()
         
-        var bindObjects: [Any] = []
         let mirror = Mirror(reflecting: self)
         for children in mirror.children {
-//            if ABindable.checkBind(children.value) {
-//                bindObjects.append(children.value)
-//            }
-            
             if children.value is UIControl {
                 (children.value as! UIControl).checkAndRemoveAllEventBlock()
             }
         }
-        clearBinds(objects: bindObjects)
         clearAllEvents()
         
         notification.clearNotifications()
@@ -1412,7 +1406,7 @@ open class AView: UIView, ANotificationDelegate, ABindProcotol {
     /// 多个数据绑定（被动绑定） - 单向
     ///
     /// 示例：
-    /// 
+    ///
     /// ```
     /// 此示例中，多个bindsFrom设置的变量值改变后，对应bindsTo对应变量值随即改变
     ///
@@ -1420,7 +1414,7 @@ open class AView: UIView, ANotificationDelegate, ABindProcotol {
     /// ```
     ///
     /// __TestView.swift__
-    /// 
+    ///
     /// ```swift
     /// class TestView: AView {
     ///     @objc dynamic
@@ -1431,7 +1425,7 @@ open class AView: UIView, ANotificationDelegate, ABindProcotol {
     ///     private var toValue1: Bool = false
     ///     @objc dynamic
     ///     private var toValue2: Bool = false
-    /// 
+    ///
     ///     override func a_Bind() {
     ///         super.a_Bind()
     ///
@@ -1562,3 +1556,5 @@ open class AView: UIView, ANotificationDelegate, ABindProcotol {
         }
     }
 }
+
+#endif

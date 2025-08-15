@@ -20,7 +20,7 @@ open class AThemeStyle: NSObject {
     public static let kNotification_UpdateThemeStyle: String = "ATheme_notification_updateTimeStyle"
     public static let buttonProtocolKey: String = "AThemeStyle_UIButtonProtocol_buttonProtocolKey"
     public static let buttonProtocolState: String = "AThemeStyle_UIButtonProtocol_buttonProtocolState"
-    
+#if os(iOS)
     public var userInterfaceStyle: UIUserInterfaceStyle {
         get {
             UITraitCollection.current.userInterfaceStyle
@@ -30,66 +30,9 @@ open class AThemeStyle: NSObject {
             NotificationCenter.default.post(name: Notification.Name(AThemeStyle.kNotification_UpdateThemeStyle), object: nil)
         }
     }
-    //是否同步系统的模式
-    //true：userInterface的值将和系统的一样。默认
-    //false：将自定义
-    public var osUserInterfaceEnabled: Bool = true
-    
+
     public let systemUserInterfaceStyle: UIUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
-    
-    internal var themeStyleData: Array <AThemeStyleProtocol> = Array()
-    public var current: AThemeStyleProtocol? {
-        didSet {
-            NotificationCenter.default.post(name: Notification.Name(AThemeStyle.kNotification_UpdateThemeStyle), object: nil)
-        }
-    }
-    
-    @discardableResult
-    open func current(name: String) -> Bool {
-        var result: Bool = false
-        for themeStyle: AThemeStyleProtocol in self.themeStyleData {
-            if themeStyle.themeStyleName == name {
-                self.current = themeStyle
-                result = true
-                break
-            }
-        }
-        
-        return result
-    }
-    
-    public func register(themeStyles: Array<AThemeStyleProtocol>) {
-        for themeStyle: AThemeStyleProtocol in themeStyles {
-            var flag: Bool = false
-            for cacheStyleTheme: AThemeStyleProtocol in self.themeStyleData {
-                if cacheStyleTheme.themeStyleName == themeStyle.themeStyleName {
-                    flag = true
-                    break
-                }
-            }
-            if !flag {
-                self.themeStyleData.append(themeStyle)
-            }
-        }
-    }
-    
-    public static let AThemeStyleDarkMode: String = "AThemeStyleDarkMode"
-    //获取当前设置的类型
-    public static func getDarkModeType() -> AThemeStyleDarkModeType {
-        let value: Int = A.userDefaults.getIntValue(AThemeStyleDarkMode)
-            
-        if value == AThemeStyleDarkModeType.Light.rawValue {
-            return .Light
-        } else if value == AThemeStyleDarkModeType.Dark.rawValue {
-            return .Dark
-        } else {
-            return .Auto
-        }
-    }
-    //判断是否设置了深色模式
-    public static func isSetDarkMode() -> Bool {
-        return (A.userDefaults.getValue(AThemeStyle.AThemeStyleDarkMode) != nil)
-    }
+
     //设置当前类型
     public static func setDarkModeType(_ isDark: Bool) {
         A
@@ -145,6 +88,68 @@ open class AThemeStyle: NSObject {
         let currentTheme: AThemeStyleDarkModeType = AThemeStyle.getTheme()
         let colors: Array<UIColor> = themeColorDict[currentTheme == .Dark ? .Dark : .Light]!
         return colors
+    }
+#endif
+    
+    //是否同步系统的模式
+    //true：userInterface的值将和系统的一样。默认
+    //false：将自定义
+    public var osUserInterfaceEnabled: Bool = true
+    
+    
+    
+    internal var themeStyleData: Array <AThemeStyleProtocol> = Array()
+    public var current: AThemeStyleProtocol? {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name(AThemeStyle.kNotification_UpdateThemeStyle), object: nil)
+        }
+    }
+    
+    @discardableResult
+    open func current(name: String) -> Bool {
+        var result: Bool = false
+        for themeStyle: AThemeStyleProtocol in self.themeStyleData {
+            if themeStyle.themeStyleName == name {
+                self.current = themeStyle
+                result = true
+                break
+            }
+        }
+        
+        return result
+    }
+    
+    public func register(themeStyles: Array<AThemeStyleProtocol>) {
+        for themeStyle: AThemeStyleProtocol in themeStyles {
+            var flag: Bool = false
+            for cacheStyleTheme: AThemeStyleProtocol in self.themeStyleData {
+                if cacheStyleTheme.themeStyleName == themeStyle.themeStyleName {
+                    flag = true
+                    break
+                }
+            }
+            if !flag {
+                self.themeStyleData.append(themeStyle)
+            }
+        }
+    }
+    
+    public static let AThemeStyleDarkMode: String = "AThemeStyleDarkMode"
+    //获取当前设置的类型
+    public static func getDarkModeType() -> AThemeStyleDarkModeType {
+        let value: Int = A.userDefaults.getIntValue(AThemeStyleDarkMode)
+            
+        if value == AThemeStyleDarkModeType.Light.rawValue {
+            return .Light
+        } else if value == AThemeStyleDarkModeType.Dark.rawValue {
+            return .Dark
+        } else {
+            return .Auto
+        }
+    }
+    //判断是否设置了深色模式
+    public static func isSetDarkMode() -> Bool {
+        return (A.userDefaults.getValue(AThemeStyle.AThemeStyleDarkMode) != nil)
     }
 }
 
@@ -400,5 +405,3 @@ open class ATheme: NSObject, ANotificationDelegate {
     @objc optional var backgroundColor: UIColor? { get set }
     @objc optional var tintColor: UIColor? { get set }
 }
-
-

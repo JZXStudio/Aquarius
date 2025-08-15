@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2024/10/31.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -54,18 +54,12 @@ open class ANavigationController: UINavigationController, ANotificationDelegate 
         notification.clearNotifications()
         notification.delegate = nil
         
-        var bindObjects: [Any] = []
         let mirror = Mirror(reflecting: self)
         for children in mirror.children {
-//            if ABindable.checkBind(children.value) {
-//                bindObjects.append(children.value)
-//            }
-            
             if children.value is UIControl {
                 (children.value as! UIControl).checkAndRemoveAllEventBlock()
             }
         }
-        clearBinds(objects: bindObjects)
     }
     open func a_Clear() {}
     open func a_UI() {}
@@ -87,3 +81,5 @@ open class ANavigationController: UINavigationController, ANotificationDelegate 
         }
     }
 }
+
+#endif

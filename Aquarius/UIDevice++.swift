@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/8/29.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 import LocalAuthentication
@@ -50,3 +50,5 @@ extension UIDevice {
         return safeAreaBottom == 0 ? false : true
     }
 }
+
+#endif

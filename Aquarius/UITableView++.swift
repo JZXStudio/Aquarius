@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2022/9/23.
 //
-
+#if os(iOS)
 import UIKit
 import Foundation
 
@@ -253,3 +253,5 @@ private class EmptyView: UIView {
         label.alignTop(view: imageView, offset: 10.0)
     }
 }
+
+#endif
