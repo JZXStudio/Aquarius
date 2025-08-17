@@ -46,10 +46,8 @@ public struct A {
     public static let kApplicationWillTerminate: String = "kApplicationWillTerminate"
     /// 后台回到前台时调用
     public static let kApplicationDidBecomeActive: String = "kApplicationDidBecomeActive"
-#if os(iOS)
     /// 快速创建UI组件
     public static var ui: AUI = AUI.shared
-#endif
     /// 快速创建颜色实例
     public static var color: AColor = AColor.shared
     /// 快速创建图片实例

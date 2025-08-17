@@ -4,7 +4,6 @@
 //
 //  Created by SONG JIN on 2022/6/18.
 //
-#if os(iOS)
 import UIKit
 import Foundation
 /// 导航条按钮类型
@@ -471,12 +470,14 @@ open class AViewController: UIViewController, ANotificationDelegate {
         notification.clearNotifications()
         notification.delegate = nil
         
+        var bindObjects: [Any] = []
         let mirror = Mirror(reflecting: self)
         for children in mirror.children {
             if children.value is UIControl {
                 (children.value as! UIControl).checkAndRemoveAllEventBlock()
             }
         }
+        clearBinds(objects: bindObjects)
     }
     /// 页面销毁时执行的方法
     ///
@@ -1217,5 +1218,3 @@ open class AViewController: UIViewController, ANotificationDelegate {
         }
     }
 }
-
-#endif

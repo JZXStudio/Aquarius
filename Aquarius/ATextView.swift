@@ -4,7 +4,6 @@
 //
 //  Created by SONG JIN on 2023/12/19.
 //
-#if os(iOS)
 import UIKit
 import Foundation
 
@@ -87,5 +86,3 @@ open class ATextView: UITextView {
         }
     }
 }
-
-#endif

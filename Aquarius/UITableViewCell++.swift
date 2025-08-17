@@ -4,7 +4,6 @@
 //
 //  Created by SONG JIN on 2022/10/1.
 //
-#if os(iOS)
 import UIKit
 import Foundation
 
@@ -70,5 +69,3 @@ extension UITableViewCell {
         detailTextLabel?.text = detailTextLabelText
     }
 }
-
-#endif

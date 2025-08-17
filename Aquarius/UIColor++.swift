@@ -136,7 +136,6 @@ extension UIColor {
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
         return String(format: "#%02lX%02lX%02lX", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
     }
-#if os(iOS)
     public static func userInterfaceStyleColor(colors: Array<UIColor>) -> UIColor {
         let style: UIUserInterfaceStyle = AThemeStyle.shared.userInterfaceStyle
         return style == .dark ? colors[1] : colors[0]
@@ -149,5 +148,4 @@ extension UIColor {
     public static func userInterfaceStyleColor(normal: UInt, dark: UInt) -> UIColor {
         return AThemeStyle.shared.userInterfaceStyle == .dark ? UIColor.hex(dark) : UIColor.hex(normal)
     }
-#endif
 }

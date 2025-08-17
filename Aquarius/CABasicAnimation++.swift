@@ -4,7 +4,6 @@
 //
 //  Created by SONG JIN on 2025/5/6.
 //
-#if os(iOS)
 import Foundation
 import QuartzCore
 
@@ -25,5 +24,3 @@ extension CABasicAnimation {
         self.repeatCount = repeatCount
     }
 }
-
-#endif

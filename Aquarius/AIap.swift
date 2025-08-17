@@ -257,7 +257,6 @@ open class AIap {
         }
          */
     }
-#if os(iOS)
     /// 应用内弹出管理订阅类商品的界面
     /// - Parameter windowScene: scene
     public func showManageSubscriptions() async throws {
@@ -329,7 +328,6 @@ open class AIap {
             throw RefundError.Other
         }
     }
-#endif
     /// 购买某个产品
     /// - Parameter productID: 产品ID
     /// - Returns: 购买结果

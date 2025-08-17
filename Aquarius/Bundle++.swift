@@ -35,11 +35,7 @@ extension Bundle {
     }
     
     public func image(name: String) -> UIImage? {
-#if os(iOS)
         return UIImage(named: name, in: self, compatibleWith: nil)
-#elseif os(watchOS)
-        return UIImage(named: name, in: self, with: nil)
-#endif
     }
     /// 获取bundle中的文本内容
     ///
@@ -86,10 +82,6 @@ extension Bundle {
     }
     
     public func getImageResource(name: String) -> UIImage? {
-#if os(iOS)
         return UIImage.init(named: name, in: self, compatibleWith: nil)!
-#elseif os(watchOS)
-        return UIImage.init(named: name, in: self, with: nil)!
-#endif
     }
 }

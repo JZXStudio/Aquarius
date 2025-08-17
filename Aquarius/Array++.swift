@@ -56,7 +56,6 @@ extension Array {
     public func getImage(_ at: Int) -> UIImage {
         return get(at) as! UIImage
     }
-#if os(iOS)
     public func getView(_ at: Int) -> UIView {
         return get(at) as! UIView
     }
@@ -68,7 +67,6 @@ extension Array {
     public func getImageView(_ at: Int) -> UIImageView {
         return get(at) as! UIImageView
     }
-#endif
     public func getLocationDegrees(_ at: Int) -> CLLocationDegrees {
         return get(at) as! CLLocationDegrees
     }
@@ -85,7 +83,6 @@ extension Array {
         object.setValue(attributeValue, forKey: attributeKey)
     }
 }
-#if os(iOS)
 extension Array<UIView> {
     public func alpha(_ alpha: CGFloat) {
         for currentView: UIView in self {
@@ -298,5 +295,3 @@ extension Array<UILabel> {
         }
     }
 }
-
-#endif

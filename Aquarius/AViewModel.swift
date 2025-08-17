@@ -57,10 +57,8 @@ open class AViewModel: AViewBase, ObservableObject, ANotificationDelegate {
     internal var coreNotification: ANotification = ANotification()
         
     internal let logger: ALogger = ALogger()
-#if os(iOS)
     /// 缓存viewController（弱引用）
     public weak var viewController: AViewController? = nil
-#endif
     deinit {
         a_InternalClear()
         a_Clear()
@@ -195,18 +193,16 @@ open class AViewModel: AViewBase, ObservableObject, ANotificationDelegate {
         
         self.coreNotification.clearNotifications()
         self.coreNotification.delegate = nil
-#if os(iOS)
         viewController = nil
-#endif
         
+        var bindObjects: [Any] = []
         let mirror = Mirror(reflecting: self)
         for children in mirror.children {
-#if os(iOS)
             if children.value is UIControl {
                 (children.value as! UIControl).checkAndRemoveAllEventBlock()
             }
-#endif
         }
+        clearBinds(objects: bindObjects)
     }
     /// 页面销毁时执行的方法
     ///

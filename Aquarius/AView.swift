@@ -4,7 +4,6 @@
 //
 //  Created by SONG JIN on 2021/6/12.
 //
-#if os(iOS)
 import UIKit
 /// view的基类（MVVM）
 ///
@@ -176,12 +175,14 @@ open class AView: UIView, ANotificationDelegate, ABindProcotol {
         }
         self.delegateManagers.removeAll()
         
+        var bindObjects: [Any] = []
         let mirror = Mirror(reflecting: self)
         for children in mirror.children {
             if children.value is UIControl {
                 (children.value as! UIControl).checkAndRemoveAllEventBlock()
             }
         }
+        clearBinds(objects: bindObjects)
         clearAllEvents()
         
         notification.clearNotifications()
@@ -1556,5 +1557,3 @@ open class AView: UIView, ANotificationDelegate, ABindProcotol {
         }
     }
 }
-
-#endif

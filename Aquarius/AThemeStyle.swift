@@ -20,7 +20,6 @@ open class AThemeStyle: NSObject {
     public static let kNotification_UpdateThemeStyle: String = "ATheme_notification_updateTimeStyle"
     public static let buttonProtocolKey: String = "AThemeStyle_UIButtonProtocol_buttonProtocolKey"
     public static let buttonProtocolState: String = "AThemeStyle_UIButtonProtocol_buttonProtocolState"
-#if os(iOS)
     public var userInterfaceStyle: UIUserInterfaceStyle {
         get {
             UITraitCollection.current.userInterfaceStyle
@@ -89,7 +88,6 @@ open class AThemeStyle: NSObject {
         let colors: Array<UIColor> = themeColorDict[currentTheme == .Dark ? .Dark : .Light]!
         return colors
     }
-#endif
     
     //是否同步系统的模式
     //true：userInterface的值将和系统的一样。默认

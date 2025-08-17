@@ -183,7 +183,6 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage!
     }
-#if os(iOS)
     /*
      重设图片大小
      */
@@ -222,7 +221,6 @@ extension UIImage {
         let reSize = CGSize(width:self.size.width * scaleSize,height:self.size.height * scaleSize)
         return reSizeImage(reSize: reSize)
     }
-#endif
     @discardableResult public
     func sizeWidth() -> CGFloat {
         return size.width

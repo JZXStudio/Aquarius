@@ -4,7 +4,6 @@
 //
 //  Created by SONG JIN on 2024/5/10.
 //
-#if os(iOS)
 import UIKit
 import Foundation
 
@@ -178,5 +177,3 @@ extension ATableView: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-#endif

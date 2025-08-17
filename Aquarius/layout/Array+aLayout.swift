@@ -4,7 +4,7 @@
 //
 //  Created by SONG JIN on 2025/4/24.
 //
-#if os(iOS)
+
 import UIKit
 import Foundation
 
@@ -120,6 +120,3 @@ extension Array<UIView> {
         view.alignRight(view: view, offset: offset, animate: animate, duration: duration)
     }
 }
-
-#endif
-

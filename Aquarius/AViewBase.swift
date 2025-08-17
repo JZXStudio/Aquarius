@@ -26,14 +26,14 @@ open class AViewBase: NSObject, ABindProcotol {
     open func a_Preview() {}
     open func a_Begin() {}
     private func a_InternalClear() {
+        var bindObjects: [Any] = []
         let mirror = Mirror(reflecting: self)
         for children in mirror.children {
-#if os(iOS)
             if children.value is UIControl {
                 (children.value as! UIControl).checkAndRemoveAllEventBlock()
             }
-#endif
         }
+        clearBinds(objects: bindObjects)
     }
     open func a_Clear() {}
     //MARK: - ABindProcotol

@@ -17,7 +17,6 @@ open class ACalendarEvent: NSObject {
     public static let shared = ACalendarEvent()
     
     let eventStore: EKEventStore = EKEventStore()
-#if os(iOS)
     public func openCalendarApp() {
         if UIApplication.shared.canOpenURL(URL(string:"calshow:")!) {
             UIApplication.shared.open(URL(string:"calshow:")!, options: [:], completionHandler: nil)
@@ -92,7 +91,6 @@ open class ACalendarEvent: NSObject {
             //print(error)
         }
     }
-#endif
     /*
      startDate: 开始日期
      endDate: 结束日期
@@ -216,7 +214,6 @@ open class AReminderEvent: NSObject {
     public static let shared = AReminderEvent()
     
     let eventStore: EKEventStore = EKEventStore()
-#if os(iOS)
     public func openReminderApp() {
         if UIApplication.shared.canOpenURL(URL(string:"x-apple-reminder://")!) {
             UIApplication.shared.open(URL(string:"x-apple-reminder://")!, options: [:], completionHandler: nil)
@@ -288,7 +285,6 @@ open class AReminderEvent: NSObject {
             //print(error)
         }
     }
-#endif
     /*
      startDate: 开始日期
      endDate: 结束日期

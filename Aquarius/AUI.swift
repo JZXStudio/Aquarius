@@ -4,7 +4,6 @@
 //
 //  Created by SONG JIN on 2024/9/13.
 //
-#if os(iOS)
 import UIKit
 import WebKit
 import MapKit
@@ -482,5 +481,3 @@ open class AUI: NSObject {
     
     public lazy var lazyMapView: MKMapView = MKMapView()
 }
-
-#endif

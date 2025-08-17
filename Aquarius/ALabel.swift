@@ -4,7 +4,6 @@
 //
 //  Created by SONG JIN on 2022/9/16.
 //
-#if os(iOS)
 import UIKit
 import Foundation
 
@@ -53,5 +52,3 @@ open class ALabel: UILabel {
         super.drawText(in: rect)
     }
 }
-
-#endif
