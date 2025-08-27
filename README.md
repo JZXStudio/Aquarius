@@ -1164,3 +1164,13 @@ class TestVM: AViewModel {
     ...
 }
 ```
+
+# 使用此框架开发的APP
+
+<p align="left">
+<img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/df/f0/c8/dff0c8eb-f5e9-08fb-b19a-1263eb4ca066/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/460x0w.webp" alt="悦记" width="25%">
+<img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/51/a5/24/51a5243b-3ae7-2f2a-34d5-38db57a5f94c/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/460x0w.webp" alt="爱寻车" width="25%">
+</p>
+
+[悦记-愉悦记录-快乐生活](https://apps.apple.com/cn/app/悦记-愉悦记录-快乐生活/id6739872794)
+[爱寻车-找车-停车-健忘症-停车费用提醒](https://apps.apple.com/cn/app/爱寻车-找车-停车-健忘症-停车费用提醒/id6747658196)
