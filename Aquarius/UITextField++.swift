@@ -423,6 +423,10 @@ extension UITextField {
         if design.placeholder != nil {
             placeholder = design.placeholder as? String
         }
+        
+        if design.leftViewMode != nil {
+            leftViewMode = design.leftViewMode as! UITextField.ViewMode
+        }
     }
     
     public func clearText() {

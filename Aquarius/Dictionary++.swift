@@ -53,6 +53,12 @@ extension Dictionary {
         return Array(self.values)[at]
     }
     
+    //获取指定位置的value，一般用在字典里有多个key和value的时候
+    public func getValue(_ keyString: String) -> Any {
+        let obj = self as? [String : Any]
+        return obj![keyString] as Any
+    }
+    
     public func getStringValue(_ at: Int = 0) -> String {
         return getValue(at) as! String
     }

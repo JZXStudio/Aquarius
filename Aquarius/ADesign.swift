@@ -295,4 +295,6 @@ public protocol DesignStyleProtocol {
     @objc optional var thumbTintColor: Any { get set }
     /// 是否可点击（可选）
     @objc optional var isEnabled: Any { get set }
+    /// 是否可点击（可选）
+    @objc optional var leftViewMode: Any { get set }
 }

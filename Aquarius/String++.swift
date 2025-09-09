@@ -267,6 +267,9 @@ extension String {
             return 0.0
         }
     }
+    public func toFontSize(size: CGFloat) -> UIFont? {
+        UIFont(name: self, size: size)
+    }
     /// 判断传入的参数是否为空，如果不为空的话，则赋值给该String
     /// - Parameter string: 待判断的String
     public mutating func a_isValid(_ string: String) {
