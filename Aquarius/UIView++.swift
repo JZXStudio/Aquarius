@@ -593,6 +593,16 @@ extension UIView {
         }
     }
     
+    public func layerCornerRadius(corners: UIRectCorner, radius: CGFloat) {
+        setCornerRadius(corners: corners, radius: radius)
+    }
+    
+    public static func layerCornerRadius(corners: UIRectCorner, radius: CGFloat, views: Array<UIView>) {
+        for currentView: UIView in views {
+            currentView.layerCornerRadius(corners: corners, radius: radius)
+        }
+    }
+    
     public func layerCornerCurve(_ cornerCurve: CALayerCornerCurve) {
         self.layer.cornerCurve = cornerCurve
     }
@@ -630,6 +640,36 @@ extension UIView {
     public static func layerBorderColor(_ borderColor: UIColor, views: Array<UIView>) {
         for currentView: UIView in views {
             currentView.layerBorderColor(borderColor)
+        }
+    }
+    
+    public func layerShadowOpacity(_ shadowOpacity: Float) {
+        self.layer.shadowOpacity = shadowOpacity
+    }
+    
+    public static func layerShadowOpacity(_ shadowOpacity: Float, views: Array<UIView>) {
+        for currentView: UIView in views {
+            currentView.layerShadowOpacity(shadowOpacity)
+        }
+    }
+    
+    public func layerShadowOffset(_ shadowOffset: CGSize) {
+        self.layer.shadowOffset = shadowOffset
+    }
+    
+    public static func layerShadowOffset(_ shadowOffset: CGSize, views: Array<UIView>) {
+        for currentView: UIView in views {
+            currentView.layerShadowOffset(shadowOffset)
+        }
+    }
+    
+    public func layerShadowColor(_ shadowColor: UIColor) {
+        self.layer.shadowColor = shadowColor.cgColor
+    }
+    
+    public static func layerShadowColor(_ shadowColor: UIColor, views: Array<UIView>) {
+        for currentView: UIView in views {
+            currentView.layerShadowColor(shadowColor)
         }
     }
     
@@ -790,7 +830,7 @@ extension UIView {
     }
     
     public func isHidden(_ isHidden: Bool=true) {
-        self.isHidden = !isHidden
+        self.isHidden = isHidden
     }
     
     public static func isHidden(_ isHidden: Bool=true, views: Array<UIView>) {
@@ -1552,5 +1592,19 @@ extension UIView {
     /// 去除毛玻璃效果
     public func blurUnEnabled() {
         blurEnabled(enabled: false)
+    }
+}
+
+extension UIView {
+    /// 设置部分圆角
+    /// - Parameters:
+    ///   - corners: 需要设置为圆角的角
+    ///   - radius: 圆角半径
+    func setCornerRadius(corners: UIRectCorner, radius: CGFloat) {
+        layer.cornerRadius = radius
+        // 指定需要圆角的角
+        layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
+        // 确保 clipsToBounds 为 true，否则圆角可能不生效
+        clipsToBounds = true
     }
 }

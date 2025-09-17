@@ -68,4 +68,36 @@ open class AGCD: NSObject {
             finish()
         }
     }
+    /// 延迟执行（主线程）
+    /// - Parameters:
+    ///   - delay: 延迟秒数
+    ///   - closure: 执行的方法
+    public func mainDelay(_ delay: Double, closure: @escaping () -> Void) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+    }
+    /// 延迟执行（主线程）（静态函数）
+    /// - Parameters:
+    ///   - delay: 延迟秒数
+    ///   - closure: 执行的方法
+    public static func mainDelay(_ delay: Double, closure: @escaping () -> Void) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+    }
+    /// 延迟执行（全局队列）
+    /// - Parameters:
+    ///   - delay: 延迟秒数
+    ///   - closure: 执行的方法
+    public func globalDelay(_ delay: Double, closure: @escaping () -> Void) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.global().asyncAfter(deadline: when, execute: closure)
+    }
+    /// 延迟执行（全局队列）（静态函数）
+    /// - Parameters:
+    ///   - delay: 延迟秒数
+    ///   - closure: 执行的方法
+    public static func globalDelay(_ delay: Double, closure: @escaping () -> Void) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.global().asyncAfter(deadline: when, execute: closure)
+    }
 }

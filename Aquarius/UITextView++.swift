@@ -224,12 +224,12 @@ extension UITextView {
         return constraint.height
     }
     
-    public func equalTextWidth() {
-        self.width(width: self.getTextWidth())
+    public func equalTextWidth(_ offset: CGFloat=0.0) {
+        self.width(width: self.getTextWidth()+offset)
     }
     
-    public func equalTextHeight() {
-        self.height(height: self.getTextHeight())
+    public func equalTextHeight(_ offset: CGFloat=0.0) {
+        self.height(height: self.getTextHeight()+offset)
     }
     
     public func equalTextSize() {
