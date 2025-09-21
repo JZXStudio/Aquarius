@@ -31,6 +31,254 @@ Aquarius是以帮助独立开发者规范化开发流程，提高开发效率为
 
 也可以给我发邮件[studio_jzx@163.com](mailto:studio_jzx@163.com)
 
+# 新增功能
+
+## 液态玻璃效果
+
+新增按钮的液态玻璃效果。
+
+液态玻璃效果包括：
+
+1. Glass
+
+2. ClearGlass
+
+3. ProminentGlass
+
+4. ProminentClearGlass
+
+针对以上四种按钮液态玻璃效果，框架新增2个枚举类型，包括：
+
+1. LiquidGlassType
+   
+   1. glass
+   
+   2. clearGlass
+   
+   3. prominentGlass
+   
+   4. prominentClearGlass
+
+2. LiquidGlassConfig
+   
+   1. title
+   
+   2. attributedTitle
+   
+   3. subtitle
+   
+   4. attributedSubtitle
+   
+   5. titlePadding
+   
+   6. titleAlignment
+   
+   7. image
+   
+   8. imagePadding
+   
+   9. baseForegroundColor
+   
+   10. baseBackgroundColor
+
+新增的方法包括：
+
+```swift
+public func liquid(_ config: UIButton.Configuration)
+public func liquid(
+        type: LiquidGlassType,
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil)
+public func liquid(type: LiquidGlassType, config: [LiquidGlassConfig : Any]?=nil)
+```
+
+```swift
+public func liquid_Glass(
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil)
+public func liquid_Glass(_ config: [LiquidGlassConfig : Any]?=nil)
+```
+
+```swift
+public func liquid_ClearGlass(
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil)
+public func liquid_ClearGlass(_ config: [LiquidGlassConfig : Any]?=nil)
+```
+
+```swift
+public func liquid_ProminentGlass(
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil)
+public func liquid_ProminentGlass(_ config: [LiquidGlassConfig : Any]?=nil)
+```
+
+```swift
+public func liquid_ProminentClearGlass(
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil)
+public func liquid_ProminentClearGlass(_ config: [LiquidGlassConfig : Any]?=nil)
+```
+
+### liquid
+
+**单独设置UIButton.Configuration**
+
+示例：
+
+```swift
+let button: UIButton = A.ui.button
+var config: UIButton.Configuration = UIButton.Configuration.glass()
+config.title = "test"
+button.liquid(config)
+```
+
+**设置液态玻璃类型，并做相关配置**
+
+示例：
+
+```swift
+let button: UIButton = A.ui.button
+button.liguid(type: .glass, title: "test"...)
+```
+
+**设置液态玻璃类型，并通过字典做相关配置**
+
+示例：
+
+```swift
+let type: LiquidGlassType = .glass
+let config: [LiquidGlassConfig: Any] = [
+    title : "test"
+]
+let button: UIButton = A.ui.button
+button.liquid(type, config)
+```
+
+### liquid_Glass
+
+**设置Glass液态玻璃类型，并做相关配置**
+
+示例：
+
+```swift
+let button: UIButton = A.ui.button
+button.liguid_Glass(title: "test")
+```
+
+**设置Glass液态玻璃类型，并通过字典做相关配置**
+
+```swift
+let config: [LiquidGlassConfig : Any] = [
+   .title : "test"
+]
+let button: UIButton = A.ui.button
+button.liquid_Glass(config)
+```
+
+### liquid_ClearGlass
+
+**设置ClearGlass液态玻璃类型，并做相关配置**
+
+示例：
+
+```swift
+let button: UIButton = A.ui.button
+button.liguid_ClearGlass(title: "test")
+```
+
+**设置ClearGlass液态玻璃类型，并通过字典做相关配置**
+
+```swift
+let config: [LiquidGlassConfig : Any] = [
+   .title : "test"
+]
+let button: UIButton = A.ui.button
+button.liquid_ClearGlass(config)
+```
+
+### liquid_prominentGlass
+
+**设置prominentGlass液态玻璃类型，并做相关配置**
+
+示例：
+
+```swift
+let button: UIButton = A.ui.button
+button.liguid_prominentGlass(title: "test")
+```
+
+**设置prominentGlass液态玻璃类型，并通过字典做相关配置**
+
+```swift
+let config: [LiquidGlassConfig : Any] = [
+   .title : "test"
+]
+let button: UIButton = A.ui.button
+button.liquid_prominentGlass(config)
+```
+
+### liquid_prominentClearGlass
+
+**设置prominentClearGlass液态玻璃类型，并做相关配置**
+
+示例：
+
+```swift
+let button: UIButton = A.ui.button
+button.liguid_prominentClearGlass(title: "test")
+```
+
+**设置prominentClearGlass液态玻璃类型，并通过字典做相关配置**
+
+```swift
+let config: [LiquidGlassConfig : Any] = [
+   .title : "test"
+]
+let button: UIButton = A.ui.button
+button.liquid_prominentClearGlass(config)
+```
+
 # 核心功能
 
 框架提供：
