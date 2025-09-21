@@ -23,6 +23,26 @@ public enum ButtonEqualProperty {
     case none
 }
 
+public enum LiquidGlassType {
+    case glass
+    case clearGlass
+    case prominentGlass
+    case prominentClearGlass
+}
+
+public enum LiquidGlassConfig {
+    case title
+    case attributedTitle
+    case subtitle
+    case attributedSubtitle
+    case titlePadding
+    case titleAlignment
+    case image
+    case imagePadding
+    case baseForegroundColor
+    case baseBackgroundColor
+}
+
 extension UIButton {
     internal struct UIButtonTemp {
         public static var equalProperty: ButtonEqualProperty = .none
@@ -290,6 +310,556 @@ extension UIButton {
         
         if design.imageAndTitlePadding != nil {
             imageAndTitlePadding(style: design.imageAndTitlePadding as! ImageAndTitlePossitionStyle)
+        }
+    }
+    /// 添加液态玻璃效果
+    ///
+    /// __示例:__
+    ///
+    /// ```swift
+    /// let button: UIButton = A.ui.button
+    /// var config: UIButton.Configuration = UIButton.Configuration.glass()
+    /// config.title = "test"
+    /// button.liquid(config)
+    /// ```
+    ///
+    /// - Parameter config: 配置
+    public func liquid(_ config: UIButton.Configuration) {
+        self.configuration = config
+    }
+    /// 添加液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let button: UIButton = A.ui.button
+    /// button.liguid(type: .glass, title: "test")
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - type: 液态玻璃类型
+    ///   - title: 标题
+    ///   - attributedTitle: 富文本形式标题
+    ///   - subtitle: 子标题
+    ///   - attributedSubtitle: 富文本形式子标题
+    ///   - titlePadding: 标题间距
+    ///   - titleAlignment: 标题对齐方式
+    ///   - image: 图片
+    ///   - imagePadding: 图片间距
+    ///   - baseForegroundColor: 前景色
+    ///   - baseBackgroundColor: 背景色
+    /// - Returns: UIButton
+    public func liquid(
+        type: LiquidGlassType,
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil) {
+        if #available(iOS 26.0, *) {
+            if type == .glass {
+                liquid_Glass(
+                    title: title,
+                    attributedTitle: attributedTitle,
+                    subtitle: subtitle,
+                    attributedSubtitle: attributedSubtitle,
+                    titlePadding: titlePadding,
+                    titleAlignment: titleAlignment,
+                    image: image,
+                    imagePadding: imagePadding,
+                    baseForegroundColor: baseForegroundColor,
+                    baseBackgroundColor: baseBackgroundColor
+                )
+            } else if type == .clearGlass {
+                liquid_ClearGlass(
+                    title: title,
+                    attributedTitle: attributedTitle,
+                    subtitle: subtitle,
+                    attributedSubtitle: attributedSubtitle,
+                    titlePadding: titlePadding,
+                    titleAlignment: titleAlignment,
+                    image: image,
+                    imagePadding: imagePadding,
+                    baseForegroundColor: baseForegroundColor,
+                    baseBackgroundColor: baseBackgroundColor
+                )
+            } else if type == .prominentGlass {
+                liquid_ProminentGlass(
+                    title: title,
+                    attributedTitle: attributedTitle,
+                    subtitle: subtitle,
+                    attributedSubtitle: attributedSubtitle,
+                    titlePadding: titlePadding,
+                    titleAlignment: titleAlignment,
+                    image: image,
+                    imagePadding: imagePadding,
+                    baseForegroundColor: baseForegroundColor,
+                    baseBackgroundColor: baseBackgroundColor
+                )
+            } else if type == .prominentClearGlass {
+                liquid_ProminentClearGlass(
+                    title: title,
+                    attributedTitle: attributedTitle,
+                    subtitle: subtitle,
+                    attributedSubtitle: attributedSubtitle,
+                    titlePadding: titlePadding,
+                    titleAlignment: titleAlignment,
+                    image: image,
+                    imagePadding: imagePadding,
+                    baseForegroundColor: baseForegroundColor,
+                    baseBackgroundColor: baseBackgroundColor
+                )
+            }
+        }
+    }
+    /// 添加液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let type: LiquidGlassType = .glass
+    /// let config: [LiquidGlassConfig: Any] = [
+    ///     title : "test"
+    /// ]
+    /// let button: UIButton = A.ui.button
+    /// button.liquid(type, config)
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - type: 液态玻璃类型
+    ///   - config: 配置
+    public func liquid(type: LiquidGlassType, config: [LiquidGlassConfig : Any]?=nil) {
+        if #available(iOS 26.0, *) {
+            if type == .glass {
+                var glassConfig: UIButton.Configuration = UIButton.Configuration.glass()
+                
+                if config != nil {
+                    setupLiquidConfig(glassConfig: &glassConfig, config: config!)
+                }
+            } else if type == .clearGlass {
+                var glassConfig: UIButton.Configuration = UIButton.Configuration.clearGlass()
+                
+                if config != nil {
+                    setupLiquidConfig(glassConfig: &glassConfig, config: config!)
+                }
+            } else if type == .prominentGlass {
+                var glassConfig: UIButton.Configuration = UIButton.Configuration.prominentGlass()
+                
+                if config != nil {
+                    setupLiquidConfig(glassConfig: &glassConfig, config: config!)
+                }
+            } else if type == .prominentClearGlass {
+                var glassConfig: UIButton.Configuration = UIButton.Configuration.prominentClearGlass()
+                
+                if config != nil {
+                    setupLiquidConfig(glassConfig: &glassConfig, config: config!)
+                }
+            }
+        }
+    }
+    
+    private func setupLiquidConfig(glassConfig: inout UIButton.Configuration, config: [LiquidGlassConfig : Any]) {
+        if #available(iOS 26.0, *) {
+            if config[LiquidGlassConfig.title] != nil {
+                glassConfig.title = config[LiquidGlassConfig.title] as? String
+            }
+            
+            if config[LiquidGlassConfig.attributedTitle] != nil {
+                glassConfig.attributedTitle = config[LiquidGlassConfig.attributedTitle] as? AttributedString
+            }
+            
+            if config[LiquidGlassConfig.subtitle] != nil {
+                glassConfig.subtitle = config[LiquidGlassConfig.subtitle] as? String
+            }
+            
+            if config[LiquidGlassConfig.attributedSubtitle] != nil {
+                glassConfig.attributedSubtitle = config[LiquidGlassConfig.attributedSubtitle] as? AttributedString
+            }
+            
+            if config[LiquidGlassConfig.titlePadding] != nil {
+                glassConfig.titlePadding = config[LiquidGlassConfig.titlePadding] as! CGFloat
+            }
+            
+            if config[LiquidGlassConfig.titleAlignment] != nil {
+                glassConfig.titleAlignment = config[LiquidGlassConfig.titleAlignment] as! UIButton.Configuration.TitleAlignment
+            }
+            
+            if config[LiquidGlassConfig.image] != nil {
+                glassConfig.image = config[LiquidGlassConfig.image] as? UIImage
+            }
+            
+            if config[LiquidGlassConfig.imagePadding] != nil {
+                glassConfig.imagePadding = config[LiquidGlassConfig.imagePadding] as! CGFloat
+            }
+            
+            if config[LiquidGlassConfig.baseForegroundColor] != nil {
+                glassConfig.baseForegroundColor = config[LiquidGlassConfig.baseForegroundColor] as? UIColor
+            }
+            
+            if config[LiquidGlassConfig.baseBackgroundColor] != nil {
+                glassConfig.baseBackgroundColor = config[LiquidGlassConfig.baseBackgroundColor] as? UIColor
+            }
+            
+            self.configuration = glassConfig
+        }
+    }
+    /// 添加Glass类型液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let button: UIButton = A.ui.button
+    /// button.liguid_Glass(title: "test")
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - attributedTitle: 富文本形式标题
+    ///   - subtitle: 子标题
+    ///   - attributedSubtitle: 富文本形式子标题
+    ///   - titlePadding: 标题间距
+    ///   - titleAlignment: 标题对齐方式
+    ///   - image: 图片
+    ///   - imagePadding: 图片间距
+    ///   - baseForegroundColor: 前景色
+    ///   - baseBackgroundColor: 背景色
+    public func liquid_Glass(
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil) {
+        if #available(iOS 26.0, *) {
+            var glassConfig = UIButton.Configuration.glass()
+            if title != nil {
+                glassConfig.title = title!
+            }
+            if attributedTitle != nil {
+                glassConfig.attributedTitle = attributedTitle!
+            }
+            if subtitle != nil {
+                glassConfig.subtitle = subtitle!
+            }
+            if attributedSubtitle != nil {
+                glassConfig.attributedSubtitle = attributedSubtitle!
+            }
+            if titlePadding != nil {
+                glassConfig.titlePadding = titlePadding!
+            }
+            if titleAlignment != nil {
+                glassConfig.titleAlignment = titleAlignment!
+            }
+            if image != nil {
+                glassConfig.image = image!
+            }
+            if imagePadding != nil {
+                glassConfig.imagePadding = imagePadding!
+            }
+            if baseForegroundColor != nil {
+                glassConfig.baseForegroundColor = baseForegroundColor!
+            }
+            if baseBackgroundColor != nil {
+                glassConfig.baseBackgroundColor = baseBackgroundColor!
+            }
+            self.configuration = glassConfig
+        }
+    }
+    /// 添加Glass类型液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let config: [LiquidGlassConfig : Any] = [
+    ///     .title : "test"
+    /// ]
+    /// let button: UIButton = A.ui.button
+    /// button.liquid_Glass(config)
+    /// ```
+    ///
+    /// - Parameter config: 配置
+    public func liquid_Glass(_ config: [LiquidGlassConfig : Any]?=nil) {
+        if #available(iOS 26.0, *) {
+            var glassConfig = UIButton.Configuration.glass()
+            if config != nil {
+                setupLiquidConfig(glassConfig: &glassConfig, config: config!)
+            }
+            self.configuration = glassConfig
+        }
+    }
+    /// 添加clearGlass类型液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let button: UIButton = A.ui.button
+    /// button.liguid_ClearGlass(title: "test")
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - attributedTitle: 富文本形式标题
+    ///   - subtitle: 子标题
+    ///   - attributedSubtitle: 富文本形式子标题
+    ///   - titlePadding: 标题间距
+    ///   - titleAlignment: 标题对齐方式
+    ///   - image: 图片
+    ///   - imagePadding: 图片间距
+    ///   - baseForegroundColor: 前景色
+    ///   - baseBackgroundColor: 背景色
+    /// - Returns: UIButton
+    public func liquid_ClearGlass(
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil) {
+        if #available(iOS 26.0, *) {
+            var glassConfig = UIButton.Configuration.clearGlass()
+            if title != nil {
+                glassConfig.title = title!
+            }
+            if attributedTitle != nil {
+                glassConfig.attributedTitle = attributedTitle!
+            }
+            if subtitle != nil {
+                glassConfig.subtitle = subtitle!
+            }
+            if attributedSubtitle != nil {
+                glassConfig.attributedSubtitle = attributedSubtitle!
+            }
+            if titlePadding != nil {
+                glassConfig.titlePadding = titlePadding!
+            }
+            if titleAlignment != nil {
+                glassConfig.titleAlignment = titleAlignment!
+            }
+            if image != nil {
+                glassConfig.image = image!
+            }
+            if imagePadding != nil {
+                glassConfig.imagePadding = imagePadding!
+            }
+            if baseForegroundColor != nil {
+                glassConfig.baseForegroundColor = baseForegroundColor!
+            }
+            if baseBackgroundColor != nil {
+                glassConfig.baseBackgroundColor = baseBackgroundColor!
+            }
+            self.configuration = glassConfig
+        }
+    }
+    /// 添加clearGlass类型液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let config: [LiquidGlassConfig : Any] = [
+    ///     .title : "test"
+    /// ]
+    /// let button: UIButton = A.ui.button
+    /// button.liquid_ClearGlass(config)
+    /// ```
+    ///
+    /// - Parameter config: 配置
+    public func liquid_ClearGlass(_ config: [LiquidGlassConfig : Any]?=nil) {
+        if #available(iOS 26.0, *) {
+            var glassConfig = UIButton.Configuration.clearGlass()
+            if config != nil {
+                setupLiquidConfig(glassConfig: &glassConfig, config: config!)
+            }
+            self.configuration = glassConfig
+        }
+    }
+    /// 添加prominentGlass类型液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let button: UIButton = A.ui.button
+    /// button.liquid_ProminentGlass(title: "test")
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - attributedTitle: 富文本形式标题
+    ///   - subtitle: 子标题
+    ///   - attributedSubtitle: 富文本形式子标题
+    ///   - titlePadding: 标题间距
+    ///   - titleAlignment: 标题对齐方式
+    ///   - image: 图片
+    ///   - imagePadding: 图片间距
+    ///   - baseForegroundColor: 前景色
+    ///   - baseBackgroundColor: 背景色
+    public func liquid_ProminentGlass(
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil) {
+        if #available(iOS 26.0, *) {
+            var glassConfig = UIButton.Configuration.prominentGlass()
+            if title != nil {
+                glassConfig.title = title!
+            }
+            if attributedTitle != nil {
+                glassConfig.attributedTitle = attributedTitle!
+            }
+            if subtitle != nil {
+                glassConfig.subtitle = subtitle!
+            }
+            if attributedSubtitle != nil {
+                glassConfig.attributedSubtitle = attributedSubtitle!
+            }
+            if titlePadding != nil {
+                glassConfig.titlePadding = titlePadding!
+            }
+            if titleAlignment != nil {
+                glassConfig.titleAlignment = titleAlignment!
+            }
+            if image != nil {
+                glassConfig.image = image!
+            }
+            if imagePadding != nil {
+                glassConfig.imagePadding = imagePadding!
+            }
+            if baseForegroundColor != nil {
+                glassConfig.baseForegroundColor = baseForegroundColor!
+            }
+            if baseBackgroundColor != nil {
+                glassConfig.baseBackgroundColor = baseBackgroundColor!
+            }
+            self.configuration = glassConfig
+        }
+    }
+    /// 添加prominentGlass类型液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let config: [LiquidGlassConfig : Any] = [
+    ///     .title : "test"
+    /// ]
+    /// let button: UIButton = A.ui.button
+    /// button.liquid_ProminentGlass(config)
+    /// ```
+    ///
+    /// - Parameter config: 配置
+    public func liquid_ProminentGlass(_ config: [LiquidGlassConfig : Any]?=nil) {
+        if #available(iOS 26.0, *) {
+            var glassConfig = UIButton.Configuration.prominentGlass()
+            if config != nil {
+                setupLiquidConfig(glassConfig: &glassConfig, config: config!)
+            }
+            self.configuration = glassConfig
+        }
+    }
+    /// 添加prominentClearGlass类型液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let button: UIButton = A.ui.button
+    /// button.liquid_ProminentClearGlass(title: "test")
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - attributedTitle: 富文本形式标题
+    ///   - subtitle: 子标题
+    ///   - attributedSubtitle: 富文本形式子标题
+    ///   - titlePadding: 标题间距
+    ///   - titleAlignment: 标题对齐方式
+    ///   - image: 图片
+    ///   - imagePadding: 图片间距
+    ///   - baseForegroundColor: 前景色
+    ///   - baseBackgroundColor: 背景色
+    public func liquid_ProminentClearGlass(
+        title: String?=nil,
+        attributedTitle: AttributedString?=nil,
+        subtitle: String?=nil,
+        attributedSubtitle: AttributedString?=nil,
+        titlePadding: CGFloat?=nil,
+        titleAlignment:UIButton.Configuration.TitleAlignment?=nil,
+        image: UIImage?=nil,
+        imagePadding: CGFloat?=nil,
+        baseForegroundColor: UIColor?=nil,
+        baseBackgroundColor: UIColor?=nil) {
+        if #available(iOS 26.0, *) {
+            var glassConfig = UIButton.Configuration.prominentClearGlass()
+            if title != nil {
+                glassConfig.title = title!
+            }
+            if attributedTitle != nil {
+                glassConfig.attributedTitle = attributedTitle!
+            }
+            if subtitle != nil {
+                glassConfig.subtitle = subtitle!
+            }
+            if attributedSubtitle != nil {
+                glassConfig.attributedSubtitle = attributedSubtitle!
+            }
+            if titlePadding != nil {
+                glassConfig.titlePadding = titlePadding!
+            }
+            if titleAlignment != nil {
+                glassConfig.titleAlignment = titleAlignment!
+            }
+            if image != nil {
+                glassConfig.image = image!
+            }
+            if imagePadding != nil {
+                glassConfig.imagePadding = imagePadding!
+            }
+            if baseForegroundColor != nil {
+                glassConfig.baseForegroundColor = baseForegroundColor!
+            }
+            if baseBackgroundColor != nil {
+                glassConfig.baseBackgroundColor = baseBackgroundColor!
+            }
+            self.configuration = glassConfig
+        }
+    }
+    /// 添加prominentClearGlass类型液态玻璃效果
+    ///
+    /// __示例：__
+    ///
+    /// ```swift
+    /// let config: [LiquidGlassConfig : Any] = [
+    ///     .title : "test"
+    /// ]
+    /// let button: UIButton = A.ui.button
+    /// button.liquid_ProminentClearGlass(config)
+    /// ```
+    ///
+    /// - Parameter config: 配置
+    /// - Returns: UIButton
+    public func liquid_ProminentClearGlass(_ config: [LiquidGlassConfig : Any]?=nil) {
+        if #available(iOS 26.0, *) {
+            var glassConfig = UIButton.Configuration.prominentClearGlass()
+            if config != nil {
+                setupLiquidConfig(glassConfig: &glassConfig, config: config!)
+            }
+            self.configuration = glassConfig
         }
     }
 }
