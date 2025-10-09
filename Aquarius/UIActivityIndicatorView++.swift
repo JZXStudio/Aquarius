@@ -17,4 +17,12 @@ extension UIActivityIndicatorView {
         stopAnimating()
         isHidden()
     }
+    
+    public func mediumStyle() {
+        self.style = .medium
+    }
+    
+    public func largeStyle(){
+        self.style = .large
+    }
 }

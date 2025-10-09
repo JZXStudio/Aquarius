@@ -312,6 +312,42 @@ extension UIButton {
             imageAndTitlePadding(style: design.imageAndTitlePadding as! ImageAndTitlePossitionStyle)
         }
     }
+    
+    public func titleFont(_ font: UIFont) {
+        self.titleLabel?.font = font
+    }
+    
+    public func setNormalTitle(_ title: String?) {
+        self.setTitle(title, for: .normal)
+    }
+    
+    public func setHighlightedTitle(_ title: String?) {
+        self.setTitle(title, for: .highlighted)
+    }
+    
+    public func setNormalTitleColor(_ color: UIColor?) {
+        self.setTitleColor(color, for: .normal)
+    }
+    
+    public func setHighlightedTitleColor(_ color: UIColor?) {
+        self.setTitleColor(color, for: .highlighted)
+    }
+    
+    public func setNormalImage(_ image: UIImage?) {
+        setImage(image, for: .normal)
+    }
+    
+    public func setHighlightedImage(_ image: UIImage?) {
+        setImage(image, for: .highlighted)
+    }
+    
+    public func setNormalBackgroundImage(_ image: UIImage?) {
+        setBackgroundImage(image, for: .normal)
+    }
+    
+    public func setHighlightedBackgroundImage(_ image: UIImage?) {
+        setBackgroundImage(image, for: .highlighted)
+    }
     /// 添加液态玻璃效果
     ///
     /// __示例:__
@@ -589,7 +625,7 @@ extension UIButton {
     /// - Parameter config: 配置
     public func liquid_Glass(_ config: [LiquidGlassConfig : Any]?=nil) {
         if #available(iOS 26.0, *) {
-            var glassConfig = UIButton.Configuration.glass()
+            var glassConfig = UIButton.Configuration.clearGlass()
             if config != nil {
                 setupLiquidConfig(glassConfig: &glassConfig, config: config!)
             }

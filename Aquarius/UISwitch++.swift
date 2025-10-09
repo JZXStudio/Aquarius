@@ -27,4 +27,8 @@ extension UISwitch {
             thumbTintColor = design.thumbTintColor as? UIColor
         }
     }
+    
+    public func setOn(on: Bool, animated: Bool=true) {
+        setOn(on, animated: animated)
+    }
 }

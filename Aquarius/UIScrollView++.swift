@@ -103,4 +103,16 @@ extension UIScrollView {
         self.alwaysBounceHorizontal = false
         self.alwaysBounceVertical = false
     }
+    
+    public func isScrollEnabled(_ isScrollEnabled: Bool = true) {
+        self.isScrollEnabled = isScrollEnabled
+    }
+    
+    public func scrollable() {
+        self.isScrollEnabled = true
+    }
+    
+    public func unScrollable() {
+        self.isScrollEnabled = false
+    }
 }

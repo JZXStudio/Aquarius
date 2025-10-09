@@ -829,6 +829,10 @@ extension UIView {
         }
     }
     
+    public func hidden() {
+        self.isHidden = true
+    }
+    
     public func isHidden(_ isHidden: Bool=true) {
         self.isHidden = isHidden
     }
@@ -843,6 +847,10 @@ extension UIView {
         get {
             return self.isHidden
         }
+    }
+    
+    public func show() {
+        self.isHidden = false
     }
     
     public func isShow(_ isShow: Bool=true) {

@@ -27,4 +27,14 @@ open class AApp: NSObject {
             Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "未知构建版本"
         }
     }
+    
+    public var isIOS26: Bool {
+        get {
+            if #available(iOS 26.0, *) {
+                true
+            } else {
+                false
+            }
+        }
+    }
 }

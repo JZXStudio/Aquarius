@@ -51,4 +51,16 @@ open class ALabel: UILabel {
         let rect: CGRect = self.textRect(forBounds: rect, limitedToNumberOfLines: self.numberOfLines)
         super.drawText(in: rect)
     }
+    
+    public func verticalTopAlignment() {
+        self.verticalAlignment = .top
+    }
+    
+    public func verticalMiddleAlignment() {
+        self.verticalAlignment = .middle
+    }
+    
+    public func verticalBottomAlignment() {
+        self.verticalAlignment = .bottom
+    }
 }

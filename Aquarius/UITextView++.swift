@@ -235,4 +235,28 @@ extension UITextView {
     public func equalTextSize() {
         self.size(size: self.getTextSize())
     }
+    
+    public func isEditable(_ isEditable: Bool=true) {
+        self.isEditable = isEditable
+    }
+    
+    public func editable() {
+        self.isEditable = true
+    }
+    
+    public func unEditable() {
+        self.isEditable = false
+    }
+    
+    public func isSelectable(_ isSelectable: Bool=true) {
+        self.isSelectable = isSelectable
+    }
+    
+    public func selectable() {
+        self.isSelectable = true
+    }
+    
+    public func unSelectable() {
+        self.isSelectable = false
+    }
 }

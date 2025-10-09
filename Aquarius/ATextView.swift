@@ -85,4 +85,12 @@ open class ATextView: UITextView {
             font(design.font as? UIFont)
         }
     }
+    
+    public func placeholder(_ placeholder: String) {
+        self.placeholder = placeholder
+    }
+    
+    public func placeholderColor(_ placeholderColor: UIColor) {
+        self.placeholderColor = placeholderColor
+    }
 }
