@@ -11,6 +11,7 @@
 		274FCCBA292F4A31004C9DBC /* Aquarius.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274FCCAF292F4A31004C9DBC /* Aquarius.framework */; };
 		274FCCBF292F4A31004C9DBC /* AquariusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274FCCBE292F4A31004C9DBC /* AquariusTests.swift */; };
 		274FCCC0292F4A31004C9DBC /* Aquarius.h in Headers */ = {isa = PBXBuildFile; fileRef = 274FCCB2292F4A31004C9DBC /* Aquarius.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		27B40F932EA7ED0B0041D697 /* AAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B40F922EA7ED0B0041D697 /* AAppStore.swift */; };
 		27D5E85A2E0E814B00B7AD90 /* ATimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D5E81F2E0E814A00B7AD90 /* ATimer.swift */; };
 		27D5E85B2E0E814B00B7AD90 /* UIImage++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D5E84A2E0E814A00B7AD90 /* UIImage++.swift */; };
 		27D5E85C2E0E814B00B7AD90 /* Notification++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D5E8392E0E814A00B7AD90 /* Notification++.swift */; };
@@ -120,6 +121,7 @@
 		274FCCBE292F4A31004C9DBC /* AquariusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AquariusTests.swift; sourceTree = "<group>"; };
 		278E3B592B9B86A00027F3C6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = DEVELOPER_DIR; };
 		278E3B5A2B9B86BE0027F3C6 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
+		27B40F922EA7ED0B0041D697 /* AAppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAppStore.swift; sourceTree = "<group>"; };
 		27D5E7FE2E0E814A00B7AD90 /* A.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A.swift; sourceTree = "<group>"; };
 		27D5E7FF2E0E814A00B7AD90 /* AApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AApp.swift; sourceTree = "<group>"; };
 		27D5E8002E0E814A00B7AD90 /* ABind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABind.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				27D5E7FE2E0E814A00B7AD90 /* A.swift */,
+				27B40F922EA7ED0B0041D697 /* AAppStore.swift */,
 				27D5E7FF2E0E814A00B7AD90 /* AApp.swift */,
 				27D5E8002E0E814A00B7AD90 /* ABind.swift */,
 				27D5E8012E0E814A00B7AD90 /* ACalendar.swift */,
@@ -512,6 +515,7 @@
 				27D5E86D2E0E814B00B7AD90 /* UIView+aLayout.swift in Sources */,
 				27D5E86E2E0E814B00B7AD90 /* AIap.swift in Sources */,
 				27D5E86F2E0E814B00B7AD90 /* ANavigationController.swift in Sources */,
+				27B40F932EA7ED0B0041D697 /* AAppStore.swift in Sources */,
 				27D5E8702E0E814B00B7AD90 /* AURLSchemes.swift in Sources */,
 				27D5E8712E0E814B00B7AD90 /* UIButton++.swift in Sources */,
 				27D5E8722E0E814B00B7AD90 /* ATableViewHeaderFooterView.swift in Sources */,
@@ -728,8 +732,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1.1.0;
-				DYLIB_CURRENT_VERSION = 1.1.0;
+				DYLIB_COMPATIBILITY_VERSION = 1.2;
+				DYLIB_CURRENT_VERSION = 1.2;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -761,8 +765,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1.1.0;
-				DYLIB_CURRENT_VERSION = 1.1.0;
+				DYLIB_COMPATIBILITY_VERSION = 1.2;
+				DYLIB_CURRENT_VERSION = 1.2;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

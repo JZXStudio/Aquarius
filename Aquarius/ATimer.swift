@@ -82,6 +82,40 @@ open class ATimer {
             }
         }
     }
+    /// 格式化时间区间
+    /// - Parameters:
+    ///   - startTime: 起始时间
+    ///   - endTime: 终止时间
+    /// - Returns: 时间差字符串（格式00:00:00）
+    public func formatTimeInterval(startTime: Date, endTime: Date) -> String {
+        let countTemp = startTime.toSecondsBetween(endTime)
+        
+        var time: String = ""
+        
+        if countTemp < 60 {
+            time = countTemp < 10 ? "00:00:0\(countTemp)" : "00:00:\(countTemp)"
+        } else if countTemp >= 60 && countTemp < 3600 {
+            var secondTemp: Int = countTemp % 60
+            var minuteTemp: Int = Int(countTemp / 60)
+            
+            let secondString: String = secondTemp < 10 ? "0\(secondTemp)" : "\(secondTemp)"
+            let minuteString: String = minuteTemp < 10 ? "0\(minuteTemp)" : "\(minuteTemp)"
+            
+            time = "00:" + minuteString + ":" + secondString
+        } else if countTemp >= 3600 {
+            var hourTemp: Int = Int(countTemp / 3600)
+            var minuteTemp: Int = Int((countTemp % 3600) / 60)
+            var secondTemp: Int = Int((countTemp % 3600) % 60)
+            
+            let hourString: String = hourTemp < 10 ? "0\(hourTemp)" : "\(hourTemp)"
+            let secondString: String = secondTemp < 10 ? "0\(secondTemp)" : "\(secondTemp)"
+            let minuteString: String = minuteTemp < 10 ? "0\(minuteTemp)" : "\(minuteTemp)"
+            
+            time = hourString + ":" + minuteString + ":" + secondString
+        }
+        
+        return time
+    }
     
     private func calculateTime() {
         if count < 60 {

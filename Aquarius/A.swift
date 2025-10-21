@@ -72,6 +72,8 @@ public struct A {
     public static var app: AApp = AApp.shared
     /// 快速创建支付实例
     public static var iap: AIap = AIap.shared
-    
+    /// 快速创建日志
     public static var log: ALogger = ALogger.shared
+    /// 快速创建appstore实例
+    public static var appstore: AAppStore = AAppStore.shared
 }
