@@ -2,7 +2,7 @@
   <img src="Sources/Aquarius.png" width='100%'>
   <br>
   <br>
-  <img src="Sources/iOS-10.5-green.svg"> <img src="Sources/license-MIT-orange.svg"> <img src="Sources/swift-5.0-red.svg">
+  <img src="Sources/iOS-15.0-green.svg"> <img src="Sources/license-MIT-orange.svg"> <img src="Sources/swift-5.0-red.svg">
 </div>
 
 # 描述
@@ -24,6 +24,18 @@ Aquarius是以帮助独立开发者规范化开发流程，提高开发效率为
 - iOS15.0
 
 - Swift5.x
+
+# 安装
+
+## Swift Package Manager
+
+增加到你的`package.swift`
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/JZXStudio/Aquarius.git", from: "1.2.0")
+]
+```
 
 # 沟通
 
