@@ -2,7 +2,7 @@
 //  ATextView.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2023/12/19.
+//  Created by JZXStudio on 2023/12/19.
 //
 import UIKit
 import Foundation

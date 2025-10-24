@@ -2,7 +2,7 @@
 //  AURLSchemes.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2025/4/29.
+//  Created by JZXStudio on 2025/4/29.
 //
 
 import Foundation

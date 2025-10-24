@@ -2,7 +2,7 @@
 //  AView.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2021/6/12.
+//  Created by JZXStudio on 2021/6/12.
 //
 import UIKit
 /// view的基类（MVVM）

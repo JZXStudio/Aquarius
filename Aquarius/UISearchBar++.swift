@@ -2,7 +2,7 @@
 //  UISearchBar++.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2023/12/18.
+//  Created by JZXStudio on 2023/12/18.
 //
 import UIKit
 import Foundation

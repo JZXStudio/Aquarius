@@ -2,7 +2,7 @@
 //  AInject.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/3/21.
+//  Created by JZXStudio on 2024/3/21.
 //
 
 import Foundation

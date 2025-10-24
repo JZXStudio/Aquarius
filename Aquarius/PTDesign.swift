@@ -2,7 +2,7 @@
 //  ProtoTypeDesign.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/4/1.
+//  Created by JZXStudio on 2024/4/1.
 //
 import UIKit
 import Foundation

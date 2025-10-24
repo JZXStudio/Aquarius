@@ -2,7 +2,7 @@
 //  Array+aLayout.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2025/4/24.
+//  Created by JZXStudio on 2025/4/24.
 //
 
 import UIKit

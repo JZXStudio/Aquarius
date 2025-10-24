@@ -2,7 +2,7 @@
 //  ATableViewHeaderFooterView.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/10/23.
+//  Created by JZXStudio on 2024/10/23.
 //
 import UIKit
 import Foundation

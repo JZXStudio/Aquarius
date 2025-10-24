@@ -2,7 +2,7 @@
 //  AMap.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2025/7/8.
+//  Created by JZXStudio on 2025/7/8.
 //
 import MapKit
 import Foundation

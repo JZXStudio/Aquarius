@@ -2,7 +2,7 @@
 //  AViewModel.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2021/6/21.
+//  Created by JZXStudio on 2021/6/21.
 //
 
 import UIKit

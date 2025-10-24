@@ -2,7 +2,7 @@
 //  UIDesign.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/4/17.
+//  Created by JZXStudio on 2024/4/17.
 //
 
 import UIKit

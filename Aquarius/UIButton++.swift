@@ -2,7 +2,7 @@
 //  UIButton++.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2022/9/30.
+//  Created by JZXStudio on 2022/9/30.
 //
 import UIKit
 import Foundation
@@ -625,7 +625,7 @@ extension UIButton {
     /// - Parameter config: 配置
     public func liquid_Glass(_ config: [LiquidGlassConfig : Any]?=nil) {
         if #available(iOS 26.0, *) {
-            var glassConfig = UIButton.Configuration.clearGlass()
+            var glassConfig = UIButton.Configuration.glass()
             if config != nil {
                 setupLiquidConfig(glassConfig: &glassConfig, config: config!)
             }

@@ -2,7 +2,7 @@
 //  AStore.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2025/5/7.
+//  Created by JZXStudio on 2025/5/7.
 //
 import StoreKit
 import Foundation

@@ -2,7 +2,7 @@
 //  AMacro.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2021/10/2.
+//  Created by JZXStudio on 2021/10/2.
 //
 
 import UIKit

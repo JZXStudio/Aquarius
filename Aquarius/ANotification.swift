@@ -2,7 +2,7 @@
 //  ANotification.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2022/8/12.
+//  Created by JZXStudio on 2022/8/12.
 //
 
 import Foundation

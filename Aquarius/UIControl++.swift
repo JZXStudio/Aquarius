@@ -2,7 +2,7 @@
 //  UIControl++.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2022/9/30.
+//  Created by JZXStudio on 2022/9/30.
 //
 import UIKit
 import Foundation

@@ -2,7 +2,7 @@
 //  UIColor++.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2022/8/31.
+//  Created by JZXStudio on 2022/8/31.
 //
 
 import UIKit

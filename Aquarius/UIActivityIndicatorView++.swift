@@ -2,7 +2,7 @@
 //  UIActivityIndicatorView++.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/11/22.
+//  Created by JZXStudio on 2024/11/22.
 //
 import UIKit
 import Foundation

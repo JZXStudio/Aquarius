@@ -2,7 +2,7 @@
 //  ACalendarEvent.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/9/13.
+//  Created by JZXStudio on 2024/9/13.
 //
 
 import UIKit

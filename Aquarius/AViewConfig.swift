@@ -2,7 +2,7 @@
 //  AViewConfig.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2022/6/16.
+//  Created by JZXStudio on 2022/6/16.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  ANavigationController.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/10/31.
+//  Created by JZXStudio on 2024/10/31.
 //
 import UIKit
 import Foundation

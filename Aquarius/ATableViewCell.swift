@@ -2,7 +2,7 @@
 //  ATableViewCell.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2022/9/15.
+//  Created by JZXStudio on 2022/9/15.
 //
 import UIKit
 import Foundation

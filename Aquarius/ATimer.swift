@@ -2,7 +2,7 @@
 //  ATimer.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2025/6/24.
+//  Created by JZXStudio on 2025/6/24.
 //
 
 import Foundation

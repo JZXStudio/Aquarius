@@ -2,7 +2,7 @@
 //  Dictionary++.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/2/11.
+//  Created by JZXStudio on 2024/2/11.
 //
 import UIKit
 import Foundation

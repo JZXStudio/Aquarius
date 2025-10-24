@@ -2,7 +2,7 @@
 //  CABasicAnimation++.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2025/5/6.
+//  Created by JZXStudio on 2025/5/6.
 //
 import Foundation
 import QuartzCore

@@ -2,7 +2,7 @@
 //  UIEdgeInset++.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/10/11.
+//  Created by JZXStudio on 2024/10/11.
 //
 
 import UIKit

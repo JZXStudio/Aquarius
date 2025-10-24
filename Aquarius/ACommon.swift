@@ -2,7 +2,7 @@
 //  ACommon.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2022/8/23.
+//  Created by JZXStudio on 2022/8/23.
 //
 import UIKit
 import MessageUI

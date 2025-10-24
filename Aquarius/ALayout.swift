@@ -2,7 +2,7 @@
 //  ALayout.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/4/19.
+//  Created by JZXStudio on 2024/4/19.
 //
 
 import Foundation

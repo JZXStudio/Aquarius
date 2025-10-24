@@ -2,7 +2,7 @@
 //  UIDeviceOrientation++.swift
 //  Aquarius
 //
-//  Created by SONG JIN on 2024/12/30.
+//  Created by JZXStudio on 2024/12/30.
 //
 import UIKit
 import Foundation
