@@ -1303,3 +1303,17 @@ class AdvancedLoggingExample: AView {
 ---
 
 > 🎉 **恭喜！** 你已经完成了 Aquarius iOS 开发框架第三课的学习。下一课我们将深入探讨 AViewController 类的详解内容。
+
+---
+
+> **📝 教程信息**
+
+> - **版本**：v1.0
+> - **更新日期**：2025年11月22日
+> - **适用版本**：Aquarius 1.2.0+
+> - **难度等级**：⭐⭐☆☆☆（入门）
+> 
+> **👨‍💻 作者**：JZXStudio  
+> **📞 联系方式**：studio_jzx@163.com 
+> 
+> **🌐 项目地址**：https://github.com/JZXStudio/Aquarius
